@@ -165,9 +165,9 @@ Git vous permet de stasher plusieurs ensembles de modifications. Vous pouvez ens
 
    Si vous voulez appliquer un stash spécifique (par exemple, `stash@{1}`), utilisez la commande suivante :
 
-   ```bash
-  git stash apply 'stash@{1}'
-   ```
+```bash
+git stash apply 'stash@{1}'
+```
 
    Cela réapplique les modifications du stash numéro 1 sans le supprimer de la pile.
 
@@ -219,11 +219,13 @@ Si vous avez terminé avec tous vos stashes et que vous voulez nettoyer la pile,
      ```
 
    - Appliquer un stash spécifique sans le supprimer :
-     ```bash
-     git stash apply stash@{1}
-     ```
+     
+  ```bash
+  git stash apply stash@{1}
+  ```
 
    - Supprimer un stash spécifique sans l'appliquer :
+
      ```bash
      git stash drop stash@{1}
      ```
