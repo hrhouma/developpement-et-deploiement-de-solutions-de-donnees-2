@@ -1,6 +1,6 @@
 # **Travail Pratique N°1 : Différence entre `git merge` et `git rebase`**
 
-**Cours** : Gestion de versions avec Git  
+
 **Objectifs pédagogiques :**
 - Comprendre les différences fondamentales entre `git merge` et `git rebase`.
 - Observer les effets des deux commandes sur l’historique Git.
@@ -188,6 +188,4 @@
 2. Répondez aux questions de réflexion en bas du document.
 3. Soumettez votre fichier sur la plateforme de cours.
 
----
 
-**Note aux étudiants** : Ce TP est conçu pour vous permettre de pratiquer Git en profondeur. N'hésitez pas à expérimenter et à documenter toute difficulté rencontrée dans vos réponses.
