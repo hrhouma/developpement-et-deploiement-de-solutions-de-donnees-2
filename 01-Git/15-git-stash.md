@@ -176,7 +176,7 @@ git stash apply 'stash@{1}'
    Si vous voulez supprimer un stash spécifique sans l'appliquer, utilisez :
 
    ```bash
-   git stash delete 'stash@{1}'
+   git stash drop 'stash@{1}'
    ```
 
    Cela supprime le stash numéro 1 de la pile.
