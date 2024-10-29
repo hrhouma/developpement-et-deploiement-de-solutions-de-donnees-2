@@ -57,6 +57,8 @@ Nous allons maintenant créer un deuxième répertoire de travail pour pouvoir t
    Par exemple, si vous voulez travailler sur une branche `feature-X` tout en restant sur la branche `main` dans votre répertoire de travail actuel, vous pouvez créer un nouveau répertoire de travail pour `feature-X` avec la commande suivante :
 
    ```bash
+   git checkout -b feature-X
+   git checkout main
    git worktree add ../feature-X feature-X
    ```
 
