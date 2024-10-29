@@ -176,11 +176,14 @@ Git vous permet de stasher plusieurs ensembles de modifications. Vous pouvez ens
    Si vous voulez supprimer un stash spécifique sans l'appliquer, utilisez :
 
    ```bash
-   git stash drop stash@{1}
+   git stash apply 'stash@{1}'
    ```
 
    Cela supprime le stash numéro 1 de la pile.
 
+# Correction : 
+
+#### https://stackoverflow.com/questions/31297108/git-stash-apply-stashx-not-working-for-me
 ---
 
 ### **Étape 6 : Nettoyer tous les stashes avec `git stash clear`**
