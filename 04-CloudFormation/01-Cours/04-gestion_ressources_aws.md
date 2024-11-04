@@ -152,3 +152,28 @@ Dans cet exemple, la base de données RDS **MyDatabase** ne sera créée qu’ap
 ---
 
 La gestion des ressources AWS avec CloudFormation vous permet de contrôler et de structurer vos infrastructures avec précision et flexibilité. En exploitant les dépendances et en organisant logiquement vos ressources, vous pouvez garantir un déploiement fiable et reproductible.
+
+
+# ANNEXE: 
+
+
+*Cette table décrit chaque ressource, son type CloudFormation et sa fonction principale. Vous pouvez ainsi rapidement identifier les types de ressources que vous pouvez gérer dans vos templates.*
+
+```
++----------------------+--------------------------+-----------------------------------------+
+| Ressource            | Type CloudFormation      | Description                             |
++----------------------+--------------------------+-----------------------------------------+
+| Instance EC2         | AWS::EC2::Instance       | Crée une instance de machine virtuelle  |
+| Bucket S3            | AWS::S3::Bucket          | Stocke des objets dans le cloud         |
+| Base de données RDS  | AWS::RDS::DBInstance     | Déploie une base de données gérée       |
+| VPC                  | AWS::EC2::VPC            | Crée un réseau virtuel isolé            |
+| Sous-Réseau (Subnet) | AWS::EC2::Subnet         | Sous-réseau dans un VPC                 |
+| Groupe de Sécurité   | AWS::EC2::SecurityGroup  | Règles de pare-feu pour les ressources  |
+| IAM Role             | AWS::IAM::Role           | Rôle IAM pour autorisations AWS         |
+| Load Balancer        | AWS::ElasticLoadBalancing::LoadBalancer | Répartit le trafic réseau  |
+| Lambda Function      | AWS::Lambda::Function    | Déploie une fonction serverless         |
+| CloudFront           | AWS::CloudFront::Distribution | Diffuse du contenu via CDN        |
++----------------------+--------------------------+-----------------------------------------+
+```
+
+
