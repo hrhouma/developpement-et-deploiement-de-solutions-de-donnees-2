@@ -1,6 +1,6 @@
 
 
-## 🧮 Partie 5/6 - Tuto Maven pour un Projet de Calculatrice  
+## 🧮 Partie 5/15 - Tuto Maven pour un Projet de Calculatrice  
 
 ---
 
