@@ -1,5 +1,5 @@
 
-## 🐧 Partie 6/6 - Tutoriel MAVEN & LINUX : Création et Configuration Automatisée d’un Projet Maven sur Ubuntu 22.04
+## 🐧 Partie 6/15 - Tutoriel MAVEN & LINUX : Création et Configuration Automatisée d’un Projet Maven sur Ubuntu 22.04
 ------
 
 Ce tutoriel vous guidera à travers les étapes nécessaires pour configurer un projet Java avec Maven sur Ubuntu 22.04, incluant l'installation de Java 17 et Maven 3.9.0, ainsi que la création automatique d'un projet Maven avec un script shell.
