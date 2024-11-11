@@ -99,7 +99,61 @@ Pour mieux comprendre Jenkins en action, voyons un exemple d’un pipeline CI/CD
 3. **Tests** 🧪 : Jenkins exécute des tests (comme NUnit, MSTest).
 4. **Déploiement en Production** 🌐 : Une fois les tests réussis, Jenkins déploie les artefacts dans l’environnement de production, puis génère un rapport de réussite ou d’échec.
 
-Ces figures montrent le flux d’un pipeline Jenkins, du commit initial jusqu’au déploiement, et comment Jenkins automatise chaque étape.
+*Ces figures montrent le flux d’un pipeline Jenkins, du commit initial jusqu’au déploiement, et comment Jenkins automatise chaque étape.*
+
+
+
+
+
+
+
+
+
+
+### 🔄 Figure 3 - Pipeline CI/CD avec Jenkins
+
+*Ce pipeline CI/CD automatisé offre une **intégration fluide**, réduit les erreurs manuelles et permet aux équipes de déployer plus rapidement des versions de qualité. Jenkins joue un rôle central en coordonnant toutes les étapes, offrant ainsi un processus CI/CD robuste, fiable et optimisé pour les projets modernes.*
+
+![image](https://github.com/user-attachments/assets/6fe7f27e-dd3f-4b47-ba4d-8c6b23f063f5)
+
+
+
+
+### 🔄 Processus de CI/CD avec Jenkins : Illustration et Explication des Étapes
+
+Ce diagramme présente les étapes d'un **pipeline CI/CD** classique, automatisé avec Jenkins, illustrant le flux de travail depuis les modifications de code jusqu'au déploiement, en passant par les tests et la surveillance. Chaque étape est orchestrée pour garantir une intégration rapide et sans erreur des nouvelles fonctionnalités.
+
+#### 1️⃣ **Mise à jour du code sur le serveur principal**
+
+Les développeurs travaillent sur leur code et, une fois satisfaits, soumettent leurs modifications dans le système de gestion de versions, ici représenté par **SVN** (Subversion). Cette étape est cruciale, car elle déclenche le pipeline d’intégration continue (CI), assurant que chaque modification est validée et testée en temps réel.
+
+#### 2️⃣ **Vérification des modifications**
+
+Le **serveur d'intégration continue** surveille en permanence le système de versionnement (SVN) pour détecter toute modification de code. Dès qu'un changement est identifié, Jenkins initie automatiquement le processus de build. Cette surveillance proactive garantit que toute modification est rapidement intégrée et validée.
+
+#### 3️⃣ **Compilation du code**
+
+Lorsqu’une modification est détectée, le processus de **compilation** démarre. Jenkins utilise un **script d'automatisation** (tel que Maven ou Phing) pour compiler le code et vérifier sa structure et sa syntaxe. Ce processus permet de créer des artefacts (binaries, exécutables, etc.) prêts pour les étapes suivantes. Une compilation réussie confirme que le code est fonctionnel et conforme aux standards du projet.
+
+#### 4️⃣ **Exécution des tests unitaires**
+
+Une fois la compilation terminée, Jenkins exécute les **tests unitaires** pour chaque modification de code. Ces tests vérifient la stabilité et la fiabilité des fonctionnalités à un niveau granular, détectant les erreurs dans les méthodes individuelles. L'intégration de tests automatiques permet d'identifier rapidement les erreurs potentielles, réduisant ainsi les risques d’incidents en production.
+
+#### 5️⃣ **Génération des logs**
+
+À chaque étape (compilation, tests), Jenkins génère des **logs détaillés**. Ces logs sont essentiels pour le suivi et le diagnostic, permettant aux développeurs de comprendre où et pourquoi des erreurs se produisent. Ils facilitent également la communication entre les membres de l'équipe en fournissant une trace claire de l'historique des builds et des tests.
+
+#### 6️⃣ **Interface Web (Dashboard) et Monitoring**
+
+Toutes les informations du pipeline CI/CD sont centralisées dans une **interface web intuitive** (tableau de bord) accessible par les développeurs et chefs de projet. Cette interface fournit une vue d'ensemble du statut des builds, des tests et des déploiements, permettant une prise de décision rapide. La **fonction de monitoring** intégrée suit en temps réel la performance des builds et des tests, assurant que les anomalies sont immédiatement détectées et traitées.
+
+#### ⚙️ **Fonctionnalités supplémentaires : Flexibilité et Évolutivité**
+
+- **Scripts d'automatisation** : Jenkins permet l'utilisation de scripts comme Maven et Phing, rendant le pipeline flexible et adaptable aux besoins spécifiques de chaque projet.
+- **Scalabilité** : Grâce à son architecture maître-esclave, Jenkins peut gérer plusieurs agents qui exécutent les tâches en parallèle, permettant une meilleure utilisation des ressources et une vitesse d'exécution accrue.
+
+
+
 
 ---
 
