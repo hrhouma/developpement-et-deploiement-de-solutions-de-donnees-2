@@ -1,4 +1,4 @@
-# 🚀 Partie 1/2 - Jenkins et CI/CD : Transformez votre Développement Logiciel de A à Z 
+## 🚀 Partie 1/2 - Jenkins et CI/CD : Transformez votre Développement Logiciel de A à Z 
 
 **Imaginez ce scénario** : Votre équipe travaille sur un projet pendant six mois. Chaque développeur progresse de son côté, testant localement ses fonctionnalités et... après ces six mois, tout le monde intègre son code. Oups ! 😱 Bienvenue aux **surprises** : conflits, dépendances manquantes, fonctionnalités qui ne fonctionnent pas ensemble. Intégrer tout ce code prend plus de temps que le développement lui-même !
 
