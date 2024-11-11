@@ -1,4 +1,4 @@
-## 📝 PRATIQUE 1 – Hello World Jenkins WINDOWS
+## 📝 Partie 8/15 - PRATIQUE 1 – Hello World Jenkins WINDOWS
 
 Dans cette première pratique, nous allons configurer un projet simple dans Jenkins pour exécuter des commandes Windows de base. Nous commencerons par une configuration sans Jenkinsfile, puis nous passerons à une version avec un Jenkinsfile pour découvrir les pipelines Jenkins.
 
