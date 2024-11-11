@@ -123,3 +123,47 @@ pipeline {
 ### 🚀 Conclusion
 
 Écrire un Jenkinsfile en syntaxe Déclarative est simple et puissant. Avec des blocs bien structurés comme **agent**, **stages**, **steps**, **post**, et **triggers**, vous pouvez créer un pipeline CI/CD automatisé, lisible et évolutif. Que vous débutiez ou que vous soyez déjà familier avec Jenkins, ce guide vous offre une base solide pour écrire et optimiser vos Jenkinsfiles.
+
+---------
+# Annexe 01  - deux méthodes d'écriture d'un Jenkinsfile (Scriptée vs Déclarative) :
+---------
+
+*Je vous présente une explication en utilisant des exemples de la vraie vie :*
+
+### 🔧 **Méthode Scriptée** : L'Artisan sur Mesure
+- **Imaginez que vous êtes un artisan** qui doit construire une bibliothèque en bois, mais vous n'avez pas de plans ou d'instructions toutes faites. Vous devez **tout concevoir à partir de zéro** : choisir les dimensions, les matériaux, découper le bois, et assembler les pièces.
+- **Avantage** : Vous pouvez faire exactement ce que vous voulez, et même ajouter des détails personnalisés.
+- **Inconvénient** : Cela prend du temps, demande beaucoup de compétences, et peut être compliqué si on n’est pas expert.
+
+**En pipeline Jenkins**, la méthode Scriptée fonctionne de la même façon : vous écrivez le code en détail, avec beaucoup de liberté mais aussi plus de complexité.
+
+### 📜 **Méthode Déclarative** : Le Meuble en Kit
+- **Imaginez maintenant que vous achetez un meuble en kit** (comme chez IKEA). Vous avez déjà les pièces, les vis, et un manuel d'instructions. Vous n’avez qu’à suivre les étapes une par une.
+- **Avantage** : Simple et rapide. Tout est prêt à l'emploi, et même quelqu'un sans grande expérience peut assembler le meuble en suivant les instructions.
+- **Inconvénient** : Vous avez moins de liberté pour modifier ou personnaliser le meuble. Vous suivez un modèle standard.
+
+**En pipeline Jenkins**, la méthode Déclarative fonctionne de cette manière : elle vous fournit des blocs de code simples et structurés à utiliser, donc il est plus facile de mettre en place un pipeline sans se casser la tête.
+
+---
+
+En résumé, la **Méthode Scriptée** est comme construire un meuble sur mesure (plus complexe mais personnalisable), tandis que la **Méthode Déclarative** est comme assembler un meuble en kit (simple et guidé).
+
+
+
+---------
+# Annexe 02 - deux méthodes d'écriture d'un Jenkinsfile (Scriptée vs Déclarative) :
+---------
+
+### 🔧 **Méthode Scriptée**
+- **Qu'est-ce que c'est ?** : C'est la méthode plus ancienne pour écrire des pipelines dans Jenkins.
+- **Comment ça fonctionne ?** : Elle ressemble à un vrai code informatique. On utilise un langage appelé **Groovy** pour écrire le pipeline, et il faut parfois écrire beaucoup de logique, un peu comme si on programmait.
+- **Pour qui ?** : Cette méthode est plus flexible et puissante, mais elle est surtout utilisée par des développeurs expérimentés car elle peut être complexe.
+
+### 📜 **Méthode Déclarative**
+- **Qu'est-ce que c'est ?** : C'est la méthode plus récente et plus simple pour écrire des pipelines.
+- **Comment ça fonctionne ?** : Elle est beaucoup plus "guidée" et possède des **structures prêtes à l’emploi**. Plutôt que de tout coder, on décrit ce qu’on veut faire en utilisant des blocs de code prédéfinis (comme des recettes toutes prêtes).
+- **Pour qui ?** : Idéale pour les débutants et pour ceux qui veulent un pipeline facile à lire et à écrire. Elle offre moins de flexibilité que la méthode Scriptée, mais elle est beaucoup plus simple et rapide à comprendre.
+
+En résumé :
+- La **Méthode Scriptée** est plus flexible, mais plus complexe.
+- La **Méthode Déclarative** est plus simple, plus guidée, et donc plus facile pour les débutants.
