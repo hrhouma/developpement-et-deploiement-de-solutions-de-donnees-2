@@ -16,13 +16,12 @@ Jenkins, en automatisant le pipeline CI/CD, réduit les erreurs manuelles, garan
 
 
 --------------------
-# Annexe 1 - 
+# Annexe 1 - Figure 01 
 --------------------
 
-# Figure 01 :
-*La figure ci-bas illustre les pipelines CI/CD avec Jenkins, un outil d'automatisation largement utilisé en DevOps pour orchestrer les étapes de construction, test et déploiement du code.*
-
 ![Untitled Project](https://github.com/user-attachments/assets/ba7bc0c5-f4bc-4893-95b1-0f4b3ce4e594)
+
+*La figure ci-bas illustre les pipelines CI/CD avec Jenkins, un outil d'automatisation largement utilisé en DevOps pour orchestrer les étapes de construction, test et déploiement du code.*
 
 # **Explication :**
 Cette image présente un pipeline CI/CD où le processus se divise en plusieurs étapes :
@@ -33,7 +32,10 @@ Cette image présente un pipeline CI/CD où le processus se divise en plusieurs 
 5. **Déploiement en production** : Une fois les tests passés avec succès, le code est déployé dans l'environnement de production.
 
 
-# Figure 02 :
+--------------------
+# Annexe 1 - Figure 02 
+--------------------
+
 ![0 - C'EST QUOI JENKINS-11](https://github.com/user-attachments/assets/65ac94ce-44d8-49a5-847c-7c37632d96d8)
 
 **Explication :**
