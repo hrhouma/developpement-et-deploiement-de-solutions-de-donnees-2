@@ -1,3 +1,5 @@
+## 🛠️ Partie 4/15 - Installations
+
 -------------
 # MÉTHODE 1 - 💻 Installation sur Windows : Java 17 et Maven 3.9.0
 -------------
