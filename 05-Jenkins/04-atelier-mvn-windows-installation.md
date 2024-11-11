@@ -1,5 +1,5 @@
 -------------
-# 💻 Installation sur Windows : Java 17 et Maven 3.9.0
+# MÉTHODE 1 - 💻 Installation sur Windows : Java 17 et Maven 3.9.0
 -------------
 
 ### 🌟 Étape 1 : Installation de Java 17
@@ -41,7 +41,7 @@
    - Tapez `mvn -version` dans **cmd**.
 
 -----
-# 🐧 Installation sur Linux (Ubuntu 22.04) : Java 17, Maven 3.9.0, et Jenkins
+# MÉTHODE 2 - 🐧 Installation sur Linux (Ubuntu 22.04) : Java 17, Maven 3.9.0, et Jenkins
 -------------
 
 
@@ -107,7 +107,7 @@ java -version
    ```
 
 ---
-# 🐳 Installation avec Docker : Java, Maven, et Jenkins
+# MÉTHODE 3 - 🐳 Installation avec Docker : Java, Maven, et Jenkins
 -------------
 
 ### 🚀 Étape 1 : Installation de Docker
