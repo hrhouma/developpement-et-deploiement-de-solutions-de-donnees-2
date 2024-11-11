@@ -125,7 +125,7 @@ pipeline {
 Écrire un Jenkinsfile en syntaxe Déclarative est simple et puissant. Avec des blocs bien structurés comme **agent**, **stages**, **steps**, **post**, et **triggers**, vous pouvez créer un pipeline CI/CD automatisé, lisible et évolutif. Que vous débutiez ou que vous soyez déjà familier avec Jenkins, ce guide vous offre une base solide pour écrire et optimiser vos Jenkinsfiles.
 
 ---------
-# Annexe 01  - deux méthodes d'écriture d'un Jenkinsfile (Scriptée vs Déclarative) :
+# 📝 📝 📝  Annexe 01  - deux méthodes d'écriture d'un Jenkinsfile (Scriptée vs Déclarative) :
 ---------
 
 *Je vous présente une explication en utilisant des exemples de la vraie vie :*
@@ -151,7 +151,7 @@ En résumé, la **Méthode Scriptée** est comme construire un meuble sur mesure
 
 
 ---------
-# Annexe 02 - deux méthodes d'écriture d'un Jenkinsfile (Scriptée vs Déclarative) :
+# 📝 📝 📝 Annexe 02 - deux méthodes d'écriture d'un Jenkinsfile (Scriptée vs Déclarative) :
 ---------
 
 # 🔧 **Méthode Scriptée**
