@@ -1,4 +1,4 @@
-## 🚀 Partie 2/2 - Jenkins et CI/CD : Transformez votre Développement Logiciel de A à Z 
+## 🚀 Partie 2/15 - Jenkins et CI/CD : Transformez votre Développement Logiciel de A à Z 
 
 
 Dans la première partie, nous avons vu pourquoi Jenkins et le CI/CD transforment le développement logiciel. Dans cette seconde partie, nous allons plonger dans les détails de **Jenkins** : comprendre son rôle, ses composants essentiels, et pourquoi il est devenu un pilier de l’automatisation des pipelines CI/CD.
