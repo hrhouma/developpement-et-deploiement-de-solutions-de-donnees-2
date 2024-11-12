@@ -60,8 +60,8 @@ Créer cette structure de projet pour un projet Maven peut être effectué de de
    ```
 
 # IMPORTANT  !!!: 
-- La commande ci-dessus doit être exécuté dans un environnement Unix-Like (par exemple Git Bash)
-- Il ne faut pas utiliser la ligne de commande cmd de windows
+
+- *La commande ci-dessus doit être exécutée dans un environnement de type Unix (par exemple, Git Bash). Il est déconseillé d'utiliser l'invite de commande CMD de Windows.*
 
 **Ouvrez le projet dans VS Code** :
 
