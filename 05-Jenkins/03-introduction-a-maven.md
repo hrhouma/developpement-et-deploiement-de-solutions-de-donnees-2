@@ -143,6 +143,10 @@ Pour créer manuellement la structure de dossiers, vous suivez les étapes dans 
    cd calculator
    ```
 
+# IMPORTANT  !!!: 
+- La commande ci-dessus doit être exécuté dans un environnement Unix-Like (par exemple Git Bash)
+- Il ne faut pas utiliser la ligne de commande cmd de windows
+
 **Ouvrez le projet dans VS Code** :
 
    ```bash
