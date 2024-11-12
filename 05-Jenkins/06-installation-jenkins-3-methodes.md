@@ -59,7 +59,7 @@
 
 
 ---------------
-######  *MÉTHODE 2 - 🐧 Installation sur Linux (Ubuntu 22.04) : Java 17, Maven 3.9.0, et Jenkins*
+#####  *MÉTHODE 2 - 🐧 Installation sur Linux (Ubuntu 22.04) : Java 17, Maven 3.9.0, et Jenkins*
 -------------
 
 
