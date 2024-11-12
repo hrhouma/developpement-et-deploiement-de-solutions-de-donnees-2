@@ -1,5 +1,5 @@
 
-## 🐧 Partie 6/15 - MAVEN & LINUX (Optionnel)
+## 🐧 Partie 5/15 - MAVEN & LINUX (Optionnel)
 ######  Création et Configuration Automatisée d’un Projet Maven sur Ubuntu 22.04
 ------
 
