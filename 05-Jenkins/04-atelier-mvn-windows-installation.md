@@ -42,7 +42,25 @@
 5. **Vérifiez l'installation** :
    - Tapez `mvn -version` dans **cmd**.
 
------
+
+### 🛠️ Étape 3 : Installation de Jenkins sur windows
+
+## Commandes pour libérer le port 8080
+
+   ```bash
+   netstat -noa |findstr :8080
+   taskkill /F /PID 8864 (LE PID)
+   ```
+
+
+
+
+
+---------------
+---------------
+---------------
+---------------
+---------------
 # MÉTHODE 2 - 🐧 Installation sur Linux (Ubuntu 22.04) : Java 17, Maven 3.9.0, et Jenkins
 -------------
 
@@ -108,7 +126,23 @@ java -version
    sudo cat /var/lib/jenkins/secrets/initialAdminPassword
    ```
 
----
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------
+---------------
+---------------
+---------------
 # MÉTHODE 3 - 🐳 Installation avec Docker : Java, Maven, et Jenkins
 -------------
 
