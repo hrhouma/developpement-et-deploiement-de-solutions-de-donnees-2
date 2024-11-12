@@ -47,27 +47,8 @@ Créer cette structure de projet pour un projet Maven peut être effectué de de
 
 ---
 
-### 5.2. Création manuelle du projet
 
-Pour créer manuellement la structure de dossiers, vous suivez les étapes dans l'explorateur de fichiers de votre système d'exploitation ou via le terminal/invite de commandes :
-
-1. **Créer la structure de dossiers :**  
-   Utilisez des commandes `mkdir` dans le terminal (Linux/macOS) ou l'invite de commandes (Windows) pour créer tous les dossiers nécessaires. Voici comment vous pourriez le faire sur un système Unix-like (Linux/macOS) :
-
-   ```bash
-   mkdir -p CalculatorProject/src/main/java/com/example
-   mkdir -p CalculatorProject/src/test/java/com/example
-   ```
-
-   Sur Windows, vous devriez créer chaque dossier un par un via l'explorateur de fichiers ou l'invite de commandes avec `mkdir`.
-
-2. **Créer les fichiers :**  
-   Utilisez un éditeur de texte pour créer `Calculator.java` et `CalculatorTest.java` dans leurs dossiers respectifs, puis copiez-collez le code fourni. Créez également le fichier `pom.xml` à la racine du projet (`CalculatorProject/`).
-
-
-------
-
-### 5.3. Création automatique du projet
+### 5.2. Création automatique du projet
 
 ---
 
@@ -250,3 +231,24 @@ Cette flexibilité de Maven vous permet d'adapter le processus de build à vos b
 En suivant le cycle de vie Maven, en comprenant la structure du projet, et en utilisant les commandes Maven courantes, vous pouvez gérer vos projets Java de manière plus efficace. Maven ne simplifie pas seulement le processus de build, mais impose également des bonnes pratiques et une standardisation, facilitant ainsi la collaboration au sein des équipes sur des projets complexes.
 
 
+----------------------
+# Annexe optionnel : 
+----------------------
+
+
+### 5.2. Création manuelle du projet
+
+Pour créer manuellement la structure de dossiers, vous suivez les étapes dans l'explorateur de fichiers de votre système d'exploitation ou via le terminal/invite de commandes :
+
+1. **Créer la structure de dossiers :**  
+   Utilisez des commandes `mkdir` dans le terminal (Linux/macOS) ou l'invite de commandes (Windows) pour créer tous les dossiers nécessaires. Voici comment vous pourriez le faire sur un système Unix-like (Linux/macOS) :
+
+   ```bash
+   mkdir -p CalculatorProject/src/main/java/com/example
+   mkdir -p CalculatorProject/src/test/java/com/example
+   ```
+
+   Sur Windows, vous devriez créer chaque dossier un par un via l'explorateur de fichiers ou l'invite de commandes avec `mkdir`.
+
+2. **Créer les fichiers :**  
+   Utilisez un éditeur de texte pour créer `Calculator.java` et `CalculatorTest.java` dans leurs dossiers respectifs, puis copiez-collez le code fourni. Créez également le fichier `pom.xml` à la racine du projet (`CalculatorProject/`).
