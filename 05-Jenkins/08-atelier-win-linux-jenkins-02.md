@@ -1,4 +1,4 @@
-# 🚀 Partie pratique formative à faire individuellement – Déclencher un Pipeline Jenkins avec GitHub
+## 📝 Partie 8/15 – 🚀 Partie pratique formative à faire individuellement – Déclencher un Pipeline Jenkins avec GitHub
 
 ### 🎯 Objectif
 Automatiser l'exécution d'un script "Hello World" en configurant un pipeline Jenkins qui se déclenche à chaque fois qu'une modification est effectuée sur le fichier **README.md** et poussée sur GitHub.
@@ -105,8 +105,6 @@ Soumettez un rapport incluant les éléments suivants, avec des **captures d'éc
 4. **Pipeline en Action** : Capture de l'exécution du pipeline après modification du `README.md`.
 5. **Résultat du Pipeline** : Capture de la sortie console Jenkins affichant le message `"Hello, World from Jenkins Pipeline!"`.
 6. **Webhook GitHub** (Optionnel) : Capture de la configuration du webhook.
-
----
 
 ### 📝 Consignes
 - Organisez et décrivez chaque capture d’écran brièvement.
