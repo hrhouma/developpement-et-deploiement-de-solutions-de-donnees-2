@@ -1,4 +1,4 @@
-## 📝  🐧 Partie 7/15 - Comment Écrire un Jenkinsfile
+## 📝  🐧 Partie 9/15 - Comment Écrire un Jenkinsfile
 
 Un Jenkinsfile est un script utilisé pour définir les étapes d’un pipeline CI/CD dans Jenkins. Dans ce guide, nous allons explorer les concepts de base et nous concentrer sur la syntaxe **Déclarative**, la méthode recommandée pour sa simplicité et ses fonctionnalités.
 
