@@ -2,7 +2,7 @@
 
 ---
 
-#### **Partie 1 : Création du Dépôt GitHub**
+# **Partie 1 : Création du Dépôt GitHub**
 1. **Créer le Dépôt GitHub**
    - Accédez à [GitHub](https://github.com) et créez un nouveau dépôt nommé **`hello-python`**.
    - Téléversez les fichiers suivants dans le dépôt :
@@ -21,7 +21,7 @@
 
 ---
 
-#### **Partie 2 : Configuration de la Pipeline Jenkins**
+# **Partie 2 : Configuration de la Pipeline Jenkins**
 
 01. **Créer un Nouveau Job**
    - Allez sur Jenkins. Cliquez sur **New Item** (*Nouveau Job*).
@@ -56,7 +56,7 @@
 
 ---
 
-#### **Partie 3 : Configuration de Git dans Jenkins**
+# **Partie 3 : Configuration de Git dans Jenkins**
 
 09. **Configurer le Chemin de l’Exécutable Git**
    - Allez dans **Manage Jenkins** > **Global Tool Configuration** > **Git installations**.
@@ -73,7 +73,7 @@
 
 ---
 
-#### **Partie 4 : Création et Modification du Jenkinsfile**
+# **Partie 4 : Création et Modification du Jenkinsfile**
 
 11. **Contenu du Jenkinsfile**
     - Le fichier Jenkinsfile (voir **Annexe 1**) utilise Groovy pour définir les étapes. Assurez-vous d'utiliser la syntaxe correcte :
@@ -87,7 +87,7 @@
 
 ---
 
-#### **Partie 5 : Tester la Pipeline**
+# **Partie 5 : Tester la Pipeline**
 
 13. **Exécuter le Job**
     - Retournez au tableau de bord Jenkins, sélectionnez votre pipeline, puis cliquez sur **Build Now**.
@@ -102,7 +102,7 @@
 
 ---
 
-### **Annexe 1 : Contenu des Fichiers**
+# **Annexe 1 : Contenu des Fichiers**
 #### **Jenkinsfile**
 ```groovy
 pipeline {
@@ -153,7 +153,7 @@ public class HelloWorld {
 
 ---
 
-### **Annexe 2 : Commandes d’Installation pour Ubuntu**
+# **Annexe 2 : Commandes d’Installation pour Ubuntu**
 
 - Installer Java :
   ```bash
