@@ -168,6 +168,97 @@ public class HelloWorld {
   ```
 - Ajouter les chemins des exécutables dans Jenkinsfile (variable PATH).
 
+----
+
+# Annexe 3 - Explication de `PATH = "${env.PATH}:/usr/bin/python3"`
+
+Cette ligne fait partie de la configuration d'environnement dans un **Jenkinsfile**, spécifiquement utilisée pour s'assurer que Jenkins peut exécuter le programme Python dans l'environnement correct. Décomposons cette instruction pour mieux comprendre :
+
+---
+
+#### **1. Le Contexte : La Variable d'Environnement `PATH`**
+
+- `PATH` est une **variable d'environnement système** utilisée par votre système d'exploitation pour localiser les exécutables.
+- Quand vous exécutez une commande comme `python3` ou `java`, votre système recherche ces programmes dans les répertoires listés dans `PATH`.
+
+---
+
+#### **2. Que Fait `PATH = "${env.PATH}:/usr/bin/python3"` ?**
+
+1. **`${env.PATH}`**  
+   - Cette syntaxe indique la valeur actuelle de la variable d'environnement `PATH`.  
+   - Exemple de valeur actuelle de `PATH` sur Ubuntu :
+     ```
+     /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+     ```
+   - Jenkins utilise cette valeur pour accéder aux programmes et outils nécessaires.
+
+2. **`:/usr/bin/python3`**  
+   - `:/usr/bin/python3` ajoute un répertoire supplémentaire à la variable `PATH`.
+   - Dans ce cas, on ajoute explicitement le chemin où **Python 3** est installé sur la plupart des distributions Linux.
+
+3. **Combinaison**
+   - En combinant `${env.PATH}` et `:/usr/bin/python3`, on s'assure que les répertoires déjà présents dans le `PATH` restent accessibles, tout en ajoutant le chemin spécifique à **Python 3**.
+
+4. **Pourquoi Cette Ligne est-elle Nécessaire ?**
+   - Dans certains cas, Jenkins peut ne pas utiliser le même environnement système que votre terminal. Cela peut poser des problèmes si le chemin de Python 3 (`/usr/bin/python3`) n'est pas déjà dans le `PATH` utilisé par Jenkins.
+   - En ajoutant explicitement ce chemin, on garantit que Jenkins pourra trouver et exécuter Python 3.
+
+---
+
+#### **3. Exemple Avant et Après**
+
+##### **Avant Ajout :**
+- Valeur de `PATH` :
+  ```
+  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+  ```
+- Si Jenkins ne trouve pas Python 3 dans l'un de ces répertoires, il renvoie une erreur du type :
+  ```
+  python3: command not found
+  ```
+
+##### **Après Ajout :**
+- Valeur de `PATH` :
+  ```
+  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/python3
+  ```
+- Jenkins peut désormais exécuter Python 3 correctement.
+
+---
+
+#### **4. Pourquoi Utiliser `${env.PATH}` ?**
+
+- `${env.PATH}` permet de **préserver les chemins existants** dans `PATH`. Si on ne l’utilisait pas et remplaçait `PATH` uniquement par `/usr/bin/python3`, Jenkins perdrait l'accès à tous les autres outils (comme `git`, `javac`, etc.).
+
+---
+
+#### **5. Où Se Trouve `/usr/bin/python3` ?**
+
+- Sur Ubuntu (ou d'autres distributions Linux), **`/usr/bin/python3`** est l'emplacement par défaut de l'exécutable Python 3.
+- Vous pouvez confirmer cet emplacement avec la commande :
+  ```bash
+  which python3
+  ```
+  Résultat attendu :
+  ```
+  /usr/bin/python3
+  ```
+
+---
+
+### **Résumé**
+
+- `PATH = "${env.PATH}:/usr/bin/python3"` garantit que Python 3 est accessible pour Jenkins en ajoutant son chemin au `PATH`.
+- Cela évite les erreurs "command not found" lorsque Jenkins exécute un script Python.
+- `${env.PATH}` assure que les autres outils restent accessibles en maintenant les chemins existants dans `PATH`.
+
+
+
+
+
+
 ---
 
 ### **Bon Travail !** 🎉
+
