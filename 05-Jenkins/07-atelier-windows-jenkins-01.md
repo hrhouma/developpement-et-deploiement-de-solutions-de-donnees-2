@@ -8,8 +8,14 @@ Dans cette première pratique, nous allons configurer un projet simple dans Jenk
 
 ### 🡺 **Étape 1.1: Ajouter une étape de build**
 1. Dans Jenkins, commencez par créer un **nouveau projet de type "Freestyle project"**.
+
+![image](https://github.com/user-attachments/assets/8ddcb30f-de77-4f5e-af74-ebc4440fd4b1)
+
+![image](https://github.com/user-attachments/assets/d6927b06-b285-4a65-801b-0fd87d883a30)
+
+
 2. Allez dans la section **"Build"** et cliquez sur **"Add build step"**.
-3. Sélectionnez **"Execute Windows batch command"** pour ajouter une commande batch.
+4. Sélectionnez **"Execute Windows batch command"** pour ajouter une commande batch.
 
 ### 🡺 **Étape 1.2: Entrer les commandes batch**
 Dans la boîte de texte, entrez les commandes Windows suivantes pour lister les fichiers à la racine du disque C:\ :
