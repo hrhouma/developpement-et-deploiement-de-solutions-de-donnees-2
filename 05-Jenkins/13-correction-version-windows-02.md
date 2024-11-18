@@ -203,7 +203,7 @@ Pour détecter les chemins de Java ou Python sur votre machine Windows, utilisez
 
 ---
 
-### **Références**
+# **Références**
 
 1. [Configurer Git sur Jenkins](https://stackoverflow.com/questions/8639501/jenkins-could-not-run-git)
 2. [Pipeline Jenkins avec Python](https://stackoverflow.com/questions/56291513/execute-a-python-script-that-is-on-my-git-via-jenkins)
