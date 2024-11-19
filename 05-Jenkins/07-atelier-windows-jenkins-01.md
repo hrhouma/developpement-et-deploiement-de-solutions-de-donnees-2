@@ -114,6 +114,8 @@ pipeline {
 5. Une fois le build terminé, vous pourrez voir les résultats de ces commandes dans la **console de sortie** de Jenkins.
 
 
+# Exercice formatif :
+- Refaire les mêmes étapes dans un environnement LINUX (Remplacez les commandes par pwd , whoami, ls cd /home , etc ...)
 
 ---
 ---
