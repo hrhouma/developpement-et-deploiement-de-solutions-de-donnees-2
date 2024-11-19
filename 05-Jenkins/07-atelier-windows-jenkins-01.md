@@ -6,7 +6,7 @@ Dans cette première pratique, nous allons configurer un projet simple dans Jenk
 ---
 ---
 
-# Méthode 01
+# Méthode 01 (Freestyle)
 
 ## 🖥️ Configuration sans Jenkinsfile
 
@@ -76,7 +76,7 @@ dir
 ---
 ---
 
-# Méthode 02
+# Méthode 02 ( Pipeline)
 
 ## 📝 Configuration avec une pipeline Groovy
 
@@ -119,7 +119,7 @@ pipeline {
 ---
 ---
 
-# Méthode 03
+# Méthode 03 (SCM + JenkinsFile)
 
 
 ## 📝 Configuration avec Jenkinsfile
