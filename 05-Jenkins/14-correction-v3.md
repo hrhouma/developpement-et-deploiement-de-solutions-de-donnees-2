@@ -4,7 +4,7 @@
 
 ---
 
-#### **Pipeline 1 : Jenkinsfile Générique**
+# **Pipeline 1 : Jenkinsfile Générique**
 ```groovy
 pipeline {
     agent any
@@ -36,7 +36,7 @@ pipeline {
 
 ---
 
-#### **Pipeline 2 : Version Windows**
+# **Pipeline 2 : Version Windows**
 ```groovy
 pipeline {
     agent any
@@ -67,7 +67,7 @@ pipeline {
 
 ---
 
-#### **Pipeline 3 : Version Linux**
+# **Pipeline 3 : Version Linux**
 ```groovy
 pipeline {
     agent any
@@ -97,7 +97,7 @@ pipeline {
 
 ---
 
-#### **Pipeline 4 : Versions Linux et Windows (2-en-1)**
+# **Pipeline 4 : Versions Linux et Windows (2-en-1)**
 ```groovy
 pipeline {
     agent any
