@@ -1,5 +1,6 @@
-### **Tutoriel: Installation et Configuration de Jenkins avec Docker, Java, et Python sur Ubuntu 22.04**
-
+-------------------------------------------------------------------------------
+# **Tutoriel: Installation et Configuration de Jenkins avec Docker, Java, et Python sur Ubuntu 22.04**
+-------------------------------------------------------------------------------
 
 # **1️⃣ Préparer le Serveur Ubuntu 22.04**
 
@@ -228,3 +229,136 @@ pipeline {
    docker exec -it jenkins bash
    ```
 
+---------------------------------------------
+# Annexe - résumé
+--------------------------------------------
+
+## 1️⃣ Préparer le Serveur Ubuntu 22.04
+
+### Étape 1 : Mettre à jour le système
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+**Pourquoi ?** Cette étape garantit que tous les paquets sont à jour, ce qui évite des problèmes potentiels lors des installations ultérieures.
+
+### Étape 2 : Installer les dépendances essentielles
+```bash
+sudo apt install -y curl gnupg2 software-properties-common
+```
+**Pourquoi ?** Ces outils sont nécessaires pour ajouter des dépôts et télécharger des paquets.
+
+## 2️⃣ Installer Docker et Docker Compose
+
+### Étape 1 : Installer Docker
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+```
+
+### Étape 2 : Ajouter votre utilisateur au groupe Docker
+```bash
+sudo usermod -aG docker $USER
+```
+**Pourquoi ?** Cela vous permet d'exécuter Docker sans sudo.
+
+### Étape 3 : Installer Docker Compose
+```bash
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+### Étape 4 : Vérifier les installations
+```bash
+docker --version
+docker-compose --version
+```
+
+## 3️⃣ Installer Jenkins avec Docker
+
+### Étape 1 : Créer un réseau Docker pour Jenkins
+```bash
+docker network create jenkins
+```
+
+### Étape 2 : Lancer Jenkins avec Docker
+```bash
+docker run -d \
+  --name jenkins \
+  --restart=unless-stopped \
+  --network jenkins \
+  -p 8080:8080 -p 50000:50000 \
+  -v jenkins_home:/var/jenkins_home \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  jenkins/jenkins:lts
+```
+**Explication :** Cette commande crée un conteneur Jenkins persistant, connecté au réseau Docker et exposant les ports nécessaires.
+
+## 4️⃣ Configurer Jenkins
+
+### Étape 1 : Accéder à Jenkins
+1. Ouvrez un navigateur et allez sur `http://<IP-DU-SERVEUR>:8080`.
+2. Récupérez le mot de passe initial :
+   ```bash
+   docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+   ```
+3. Copiez ce mot de passe et collez-le dans l'interface web de Jenkins.
+
+### Étape 2 : Installer les plugins essentiels
+Choisissez "Install suggested plugins" pour une installation rapide des plugins les plus courants.
+
+### Étape 3 : Créer un utilisateur administrateur
+Suivez les instructions à l'écran pour créer votre compte administrateur Jenkins.
+
+## 5️⃣ Ajouter les Credentials GitHub dans Jenkins
+
+### Étape 1 : Générer un Personal Access Token sur GitHub
+1. Connectez-vous à GitHub.
+2. Allez dans Settings > Developer settings > Personal access tokens > Tokens (classic).
+3. Cliquez sur "Generate new token".
+4. Nommez le token (ex: "Jenkins Access").
+5. Sélectionnez les scopes : `repo` et `workflow`.
+6. Générez le token et copiez-le immédiatement.
+
+### Étape 2 : Ajouter le token dans Jenkins
+1. Dans Jenkins, allez à Manage Jenkins > Manage Credentials > Global credentials > Add Credentials.
+2. Choisissez :
+   - Kind: Username with password
+   - Scope: Global
+   - Username: Votre nom d'utilisateur GitHub
+   - Password: Collez le token GitHub
+   - ID: github-token
+   - Description: GitHub Access Token
+3. Cliquez sur "Create".
+
+## 6️⃣ Créer une Pipeline Jenkins avec Docker
+
+### Étape 1 : Créer un nouveau projet pipeline
+1. Sur le dashboard Jenkins, cliquez sur "New Item".
+2. Nommez votre projet (ex: "Java-Python-Pipeline") et choisissez "Pipeline".
+3. Cliquez sur "OK".
+
+### Étape 2 : Configurer la pipeline
+Dans la configuration du projet, faites défiler jusqu'à la section "Pipeline" et choisissez "Pipeline script" comme définition.
+
+### Étape 3 : Écrire le Jenkinsfile
+Copiez le Jenkinsfile fourni précédemment dans la zone de texte "Script".
+
+## 7️⃣ Tester et Dépanner
+
+### Étape 1 : Lancer la pipeline
+Cliquez sur "Build Now" pour exécuter votre pipeline.
+
+### Étape 2 : Vérifier les logs
+Si une erreur se produit, cliquez sur le numéro de build, puis sur "Console Output" pour voir les logs détaillés.
+
+### Étape 3 : Résoudre les problèmes courants
+- Si Git échoue : Vérifiez vos credentials GitHub et l'URL du dépôt.
+- Si Python est introuvable : Installez-le dans le conteneur Jenkins.
+- Si Java est introuvable : Vérifiez l'image Docker utilisée dans le Jenkinsfile.
+
+## 8️⃣ Bonnes Pratiques
+
+1. **Sécurité :** Changez régulièrement votre token GitHub.
+2. **Maintenance :** Mettez à jour Jenkins et ses plugins régulièrement.
+3. **Sauvegarde :** Sauvegardez régulièrement le volume `jenkins_home`.
+4. **Documentation :** Documentez vos pipelines et configurations pour faciliter la maintenance.
