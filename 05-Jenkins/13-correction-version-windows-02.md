@@ -1,149 +1,89 @@
-### **Instructions pour Windows : Configuration Complète**
+# 🚀 Guide Complet pour Configurer une Pipeline Jenkins avec GitHub 🎉
+
+### **1️⃣ Étape : Créer le Dépôt GitHub**  
+Créez un dépôt GitHub contenant les fichiers suivants :  
+📄 **HelloWorld.java**  
+📄 **hello.py**  
+📄 **Jenkinsfile** *(sans extension)*  
+
+Le contenu des fichiers est fourni dans **l'Annexe 1**.  
 
 ---
 
-# **Partie 1 : Création du Dépôt GitHub**
+### **2️⃣ Configuration de la Pipeline Jenkins** 🛠️
 
-1. **Créer un Dépôt sur GitHub**  
-   - Accédez à [GitHub](https://github.com) et créez un dépôt nommé **`hello-python`**.
-   - Téléversez les fichiers suivants :
-     - **HelloWorld.java**
-     - **hello.py**
-     - **Jenkinsfile** (sans extension).
-   - **Le contenu des fichiers se trouve dans Annexe 1**.
+#### **Étapes détaillées :**  
+1️⃣ **Créer une nouvelle pipeline :**  
+   - Donnez un nom à votre pipeline, sélectionnez **Pipeline**, et cliquez sur **OK**.
 
-2. **Cloner le Dépôt**  
-   - Copiez l’URL HTTPS du dépôt et exécutez la commande suivante dans le terminal :
-     ```bash
-     git clone https://github.com/hrhouma/hello-python.git
-     cd hello-python
-     ```
+2️⃣ **Activer Poll SCM :**  
+   - Cela permet de surveiller les changements dans le dépôt GitHub.
 
----
+3️⃣ **Choisir "Pipeline Script from SCM" :**  
+   - Sélectionnez **GIT** comme SCM.
 
-# **Partie 2 : Configuration de la Pipeline Jenkins**
+4️⃣ **Configurer l'URL du dépôt :**  
+   - Exemple : `https://github.com/hrhouma/hello-python.git`.
 
-01. **Créer une Nouvelle Pipeline**
-   - Accédez à Jenkins, cliquez sur **New Item** (*Nouveau Job*).
-   - Donnez un nom (exemple : **HelloWorldPipeline**), sélectionnez le type **Pipeline**, puis cliquez sur **OK**.
+5️⃣ ⚠️ **Configuration des credentials :**  
+   - Accédez à **Jenkins > Add > Username with password**.  
+     Utilisez votre nom d’utilisateur GitHub et un **token personnel** comme mot de passe.
 
-02. **Activer Poll SCM**
-   - Allez dans la section **Build Triggers** et cochez **Poll SCM**.
+6️⃣ **Sélectionnez vos credentials :**  
+   - Assurez-vous de sélectionner les credentials créés.
 
-03. **Choisir "Pipeline Script from SCM"**
-   - Dans la section **Pipeline**, sélectionnez **Pipeline script from SCM**.
+7️⃣ **Spécifiez la branche :**  
+   - Remplacez `/*master` par `/*main` si votre branche par défaut est **main**.
 
-04. **Configurer SCM (Source Code Management)**  
-   - Dans SCM, choisissez **Git**.  
-   - Indiquez l’URL de votre dépôt, par exemple :
-     ```bash
-     https://github.com/hrhouma/hello-python.git
-     ```
-
-05. **Ajouter vos Identifiants GitHub**
-   - Cliquez sur **Add** > **Jenkins** > **Username with password**.
-     - **Nom d’utilisateur** : `hrhouma`
-     - **Mot de passe** : Votre jeton GitHub (*Token*).
-
-06. **Sélectionner les Credentials**
-   - Assurez-vous que les credentials que vous venez d’ajouter sont bien sélectionnés.
-
-07. **Configurer la Branche**
-   - Dans **Branch Specifier**, remplacez **`*/master`** par **`*/main`** si votre branche GitHub est `main`.
-
-08. **Appliquer et Sauvegarder**
+8️⃣ **Sauvegardez vos modifications :**  
    - Cliquez sur **Apply**, puis **Save**.
 
 ---
 
-# **Partie 3 : Configurer Git sur Windows dans Jenkins**
+### **3️⃣ Configurer Git dans Jenkins** 🖥️  
 
-09. **Configurer le Chemin de l’Exécutable Git**  
-   - Retournez dans **Manage Jenkins** > **Global Tool Configuration** > **Git installations**.
-   - Ajoutez une nouvelle installation avec :
-     - **Name** : Default
-     - **Path to Git executable** :  
-       ```bash
-       C:\Program Files\Git\cmd\git.exe
-       ```
-   - Pour trouver l’exécutable Git sur Windows, exécutez la commande suivante dans votre terminal :  
+1️⃣ **Depuis le Dashboard Jenkins :**  
+   - Allez dans **Manage Jenkins > Tools > Git installations**.
+
+2️⃣ **Configurer l’emplacement de Git :**  
+   - Sous Linux : `/usr/bin/git`.  
+   - Sous Windows : `C:\Program Files\Git\cmd\git.exe`.
+
+3️⃣ **Vérifiez l’emplacement de Git :**  
+   - Commande Linux : `which git`.  
+   - Commande Windows :  
      ```cmd
      for %i in (git.exe) do @echo. %~$PATH:i
      ```
 
-10. **Appliquer et Sauvegarder**
-    - Cliquez sur **Apply**, puis **Save**.
+4️⃣ **Appliquer et Sauvegarder.**
 
 ---
 
-# **Partie 4 : Configuration du Jenkinsfile pour Windows**
+### **4️⃣ ⚡ Points Importants pour le Jenkinsfile**  
 
-11. **Mettre à Jour le Jenkinsfile**  
-   - Assurez-vous que votre `Jenkinsfile` respecte le contenu suivant, qui configure les variables d’environnement pour Windows :
-
+1️⃣ **Évitez les commandes directes comme :**  
    ```groovy
-   pipeline {
-       agent any
-       environment {
-           JAVA_HOME = 'C:\\Program Files\\Java\\jdk1.8.0_202'
-           PYTHON_HOME = 'C:\\Users\\rehou\\AppData\\Local\\Microsoft\\WindowsApps'
-           PATH = "${env.PATH};${JAVA_HOME}\\bin;${PYTHON_HOME}"
-       }
-       stages {
-           stage('Checkout') {
-               steps {
-                   git branch: 'main', url: 'https://github.com/hrhouma/hello-python.git'
-               }
-           }
-           stage('Build') {
-               steps {
-                   script {
-                       if (isUnix()) {
-                           sh 'echo "Running on Unix"'
-                       } else {
-                           bat 'echo "Running on Windows"'
-                           bat 'javac HelloWorld.java'
-                           bat 'java HelloWorld'
-                           bat 'python hello.py'
-                       }
-                   }
-               }
-           }
-       }
-   }
+   git clone ...
+   ```  
+   👉 Utilisez cette syntaxe dans votre Jenkinsfile :  
+   ```groovy
+   git branch: 'main', url: 'https://github.com/hrhouma/hello-python.git'
    ```
 
-12. **Ne Pas Utiliser les Variables Globales Jenkins**
-   - Dans Jenkins > **Manage Jenkins > Global Properties**, laissez les variables d’environnement désactivées.  
-   - Toutes les variables nécessaires sont configurées directement dans le `Jenkinsfile`.
+2️⃣ **Gestion des variables d’environnement :**  
+   - Configurez les variables dans le Jenkinsfile (voir l'Annexe 1).
 
 ---
 
-# **Partie 5 : Tester la Pipeline**
+### **Annexe 1 📄 : Contenu des Fichiers**
 
-13. **Exécuter la Pipeline**
-   - Retournez sur votre pipeline dans Jenkins et cliquez sur **Build Now**.
-
-14. **Vérifier les Résultats**
-   - Sur Windows, le pipeline doit afficher dans la console :
-     ```bash
-     Running on Windows
-     Hello, World from Jenkins Pipeline! (Java)
-     Hello, World from Jenkins Pipeline! (Python)
-     ```
-
----
-
-# **Annexe 1 : Contenu des Fichiers**
-
-#### **Jenkinsfile**
+#### **Jenkinsfile : Exemple Générique**  
 ```groovy
 pipeline {
     agent any
     environment {
-        JAVA_HOME = 'C:\\Program Files\\Java\\jdk1.8.0_202'
-        PYTHON_HOME = 'C:\\Users\\rehou\\AppData\\Local\\Microsoft\\WindowsApps'
-        PATH = "${env.PATH};${JAVA_HOME}\\bin;${PYTHON_HOME}"
+        PATH = "${env.PATH}:/usr/bin/python3"
     }
     stages {
         stage('Checkout') {
@@ -158,6 +98,54 @@ pipeline {
                         sh 'echo "Running on Unix"'
                     } else {
                         bat 'echo "Running on Windows"'
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+#### **hello.py : Script Python**  
+```python
+print("Hello, World from Jenkins Pipeline!")
+```
+
+#### **HelloWorld.java : Script Java**  
+```java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World from Jenkins Pipeline!");
+    }
+}
+```
+
+---
+
+### **Annexe 2 🖥️ : Exécution sur Windows et Linux**
+
+#### **Pipeline pour Windows et Linux (Version 2-en-1)**  
+```groovy
+pipeline {
+    agent any
+    environment {
+        JAVA_HOME = isUnix() ? '/usr/lib/jvm/java-8-openjdk-amd64' : 'C:\\Program Files\\Java\\jdk1.8.0_202'
+        PATH = isUnix() ? "${env.PATH}:${JAVA_HOME}/bin:/usr/bin" : "${env.PATH};${JAVA_HOME}\\bin;C:\\Users\\rehou\\AppData\\Local\\Microsoft\\WindowsApps"
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/hrhouma/hello-python.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        sh 'javac HelloWorld.java'
+                        sh 'java HelloWorld'
+                        sh 'python3 hello.py'
+                    } else {
                         bat 'javac HelloWorld.java'
                         bat 'java HelloWorld'
                         bat 'python hello.py'
@@ -169,44 +157,30 @@ pipeline {
 }
 ```
 
-#### **hello.py**
-```python
-print("Hello, World from Jenkins Pipeline!")
-```
-
-#### **HelloWorld.java**
-```java
-public class HelloWorld {
-    public static void main(String[] args) {
-        System.out.println("Hello, World from Jenkins Pipeline!");
-    }
-}
-```
-
 ---
 
-# **Annexe 2 : Détection des Chemins Java et Python sous Windows**
+### **Annexe 3 📦 : Installation de Java et Python**
 
-Pour détecter les chemins de Java ou Python sur votre machine Windows, utilisez les commandes suivantes dans le terminal :
+#### **Sur Linux (Ubuntu 22.04)**  
+- **Installer Java :**  
+  ```bash
+  sudo apt-get update
+  sudo apt-get install openjdk-8-jdk
+  ```
+- **Vérifier les emplacements :**  
+  ```bash
+  which java    # /usr/bin/java
+  which javac   # /usr/bin/javac
+  which python3 # /usr/bin/python3
+  ```
 
-- Pour Java :
+#### **Sur Windows**  
+- **Vérifier les emplacements :**  
   ```cmd
   for %i in (java.exe) do @echo. %~$PATH:i
-  ```
-- Pour Python :
-  ```cmd
   for %i in (python.exe) do @echo. %~$PATH:i
   ```
-- Résultats typiques :
-  - **Java** : `C:\Program Files\Java\jdk1.8.0_202\bin\java.exe`
-  - **Python** : `C:\Users\rehou\AppData\Local\Microsoft\WindowsApps\python.exe`
 
 ---
 
-# **Références**
-
-1. [Configurer Git sur Jenkins](https://stackoverflow.com/questions/8639501/jenkins-could-not-run-git)
-2. [Pipeline Jenkins avec Python](https://stackoverflow.com/questions/56291513/execute-a-python-script-that-is-on-my-git-via-jenkins)
-3. [Exemple de Jenkinsfile avec Git](https://stackoverflow.com/questions/3454424/unix-which-java-equivalent-command-on-windows)
-
-**Bon Travail !** 🎉
+🎉 **Bon travail et bonne configuration de Jenkins avec GitHub !** 🚀
