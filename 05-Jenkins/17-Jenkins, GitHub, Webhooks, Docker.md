@@ -1,4 +1,4 @@
-### ** Jenkins, GitHub, Webhooks, Docker et Déploiement**
+#  Jenkins, GitHub, Webhooks, Docker et Déploiement
 
 Ce guide vous accompagne **pas à pas** pour :
 1. **Créer un dépôt GitHub.**  
@@ -247,3 +247,93 @@ git push origin main
   docker exec jenkins apt-get update
   docker exec jenkins apt-get install python3 -y
   ```
+
+
+
+
+
+-------------------------
+-------------------------
+-------------------------
+-------------------------
+# Annexe 01 - Résumé pour tester le webhook GitHub avec Jenkins
+-------------------------
+
+Pour continuer avec la configuration des webhooks entre GitHub et Jenkins, voici les étapes suivantes :
+
+## Configurer le webhook GitHub
+
+1. Allez dans les paramètres de votre dépôt GitHub
+2. Cliquez sur "Webhooks" dans le menu de gauche
+3. Cliquez sur "Add webhook"
+4. Configurez le webhook comme suit :
+   - Payload URL : `http://<adresse-jenkins>/github-webhook/`
+   - Content type : application/json
+   - Secret : laissez vide pour l'instant
+   - Événements : sélectionnez "Just the push event"
+5. Cliquez sur "Add webhook" pour sauvegarder
+
+## Configurer Jenkins
+
+1. Installez le plugin GitHub dans Jenkins si ce n'est pas déjà fait
+2. Dans votre job Jenkins :
+   - Allez dans la configuration
+   - Dans la section "Build Triggers", cochez "GitHub hook trigger for GITScm polling"
+3. Sauvegardez la configuration du job
+
+## Tester le webhook
+
+1. Faites un commit et un push sur votre dépôt GitHub
+2. Vérifiez dans Jenkins que le build est déclenché automatiquement
+3. Dans GitHub, vérifiez les "Recent Deliveries" du webhook pour vous assurer qu'il a bien été appelé
+
+## Sécuriser le webhook (optionnel)
+
+1. Générez un token API dans Jenkins :
+   - Allez dans la configuration de l'utilisateur Jenkins
+   - Cliquez sur "Add new token" dans la section API Token
+   - Copiez le token généré
+2. Mettez à jour le webhook GitHub :
+   - Retournez dans les paramètres du webhook
+   - Collez le token Jenkins dans le champ "Secret"
+3. Sauvegardez les modifications
+
+En suivant ces étapes, vous aurez une intégration fonctionnelle entre GitHub et Jenkins utilisant les webhooks pour déclencher automatiquement des builds à chaque push.
+
+-------------------------
+# Annexe 2 - Tester à nouveau le webhook GitHub avec Jenkins
+-------------------------
+
+- *Pour tester à nouveau le webhook GitHub avec Jenkins, suivez ces étapes :*
+
+1. Déclenchez manuellement un événement sur GitHub :
+   - Faites un petit changement dans votre dépôt (par exemple, modifiez un fichier README)
+   - Committez et poussez ce changement
+
+2. Vérifiez dans Jenkins :
+   - Allez sur le dashboard de votre projet Jenkins
+   - Regardez si un nouveau build a été automatiquement déclenché
+
+3. Inspectez les logs Jenkins :
+   - Si un build a été déclenché, ouvrez-le et examinez les logs de console
+   - Cherchez des messages indiquant la réception du webhook
+
+4. Vérifiez les livraisons récentes sur GitHub :
+   - Dans votre dépôt GitHub, allez dans Settings > Webhooks
+   - Cliquez sur votre webhook Jenkins
+   - Scrollez jusqu'à "Recent Deliveries"
+   - Vérifiez si la dernière livraison a réussi (code 200)
+
+5. Redélivrez manuellement le webhook :
+   - Toujours dans la section "Recent Deliveries" de GitHub
+   - Trouvez une livraison précédente réussie
+   - Cliquez sur "Redeliver" pour la renvoyer
+
+6. Utilisez les outils de débogage Jenkins :
+   - Allez dans Manage Jenkins > System Log
+   - Configurez un nouveau logger pour "org.jenkinsci.plugins.github"
+   - Définissez le niveau sur "FINE" ou "ALL"
+   - Déclenchez à nouveau un événement et examinez ces logs détaillés
+
+En suivant ces étapes, vous pourrez tester à nouveau votre webhook et identifier tout problème potentiel dans la communication entre GitHub et Jenkins.
+
