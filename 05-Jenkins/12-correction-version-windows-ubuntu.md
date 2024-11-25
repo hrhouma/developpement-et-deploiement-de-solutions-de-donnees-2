@@ -1,4 +1,4 @@
-### **Étape 1 : Créer votre dépôt GitHub**
+# **Étape 1 : Créer votre dépôt GitHub**
 
 **Fichiers nécessaires :**
 1. **HelloWorld.java**  
@@ -9,7 +9,7 @@
 
 ---
 
-### **Étape 2 : Configurer la pipeline Jenkins**
+# **Étape 2 : Configurer la pipeline Jenkins**
 
 #### **Instructions détaillées :**
 1️⃣ **Créer une nouvelle pipeline :**
@@ -44,7 +44,7 @@
 
 ---
 
-### **Étape 3 : Configurer Git dans Jenkins**
+# **Étape 3 : Configurer Git dans Jenkins**
 
 1️⃣ **Gérer les outils Git :**
    - Depuis le tableau de bord, accédez à **Manage Jenkins > Tools > Git installations**.
@@ -65,7 +65,7 @@
 
 ---
 
-### **Étape 4 : Conseils pour le Jenkinsfile**
+# **Étape 4 : Conseils pour le Jenkinsfile**
 
 1️⃣ **Syntaxe correcte pour les commandes Git :**
    - **Évitez :**
@@ -82,9 +82,9 @@
 
 ---
 
-### **Annexe 1 : Contenu des fichiers**
+# **Annexe 1 : Contenu des fichiers**
 
-#### **1. Jenkinsfile**
+# **1. Jenkinsfile**
 ```groovy
 pipeline {
     agent any
@@ -114,12 +114,12 @@ pipeline {
 }
 ```
 
-#### **2. hello.py**
+# **2. hello.py**
 ```python
 print("Hello, World from Jenkins Pipeline!")
 ```
 
-#### **3. HelloWorld.java**
+# **3. HelloWorld.java**
 ```java
 public class HelloWorld {
     public static void main(String[] args) {
@@ -130,9 +130,9 @@ public class HelloWorld {
 
 ---
 
-### **Annexe 2 : Exécutions spécifiques**
+# **Annexe 2 : Exécutions spécifiques**
 
-#### **Pipeline pour Windows uniquement**
+# **Pipeline pour Windows uniquement**
 ```groovy
 pipeline {
     agent any
@@ -160,7 +160,7 @@ pipeline {
 }
 ```
 
-#### **Pipeline pour Linux uniquement**
+# **Pipeline pour Linux uniquement**
 ```groovy
 pipeline {
     agent any
@@ -189,7 +189,7 @@ pipeline {
 
 ---
 
-### **Annexe 3 : Commandes d'installation et vérification**
+# **Annexe 3 : Commandes d'installation et vérification**
 
 #### **Linux (Ubuntu 22.04)**
 - Installer Java :
@@ -204,7 +204,7 @@ pipeline {
   which python3 # Résultat : /usr/bin/python3
   ```
 
-#### **Windows**
+# **Windows**
 - Vérifier les chemins :
   ```cmd
   for %i in (java.exe) do @echo. %~$PATH:i
