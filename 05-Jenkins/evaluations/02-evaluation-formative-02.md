@@ -1,4 +1,4 @@
-# Partie 1 : Préparation du Dépôt GitHub
+# Préparation du Dépôt GitHub
 
 1. **Créer un Nouveau Dépôt GitHub :**
     - Connectez-vous à GitHub et créez un nouveau dépôt nommé `jenkins-data-pipeline`.
