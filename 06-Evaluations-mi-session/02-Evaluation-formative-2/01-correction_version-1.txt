@@ -1,0 +1,287 @@
+- La première étape consiste à créer votre dépôt sur GitHub avec les fichiers suivants :
+ (1) fichier HelloWorld.java
+ (2) hello.py
+ (3) Jenkinsfile (sans extension)
+
+- Le contenu de ces fichiers se trouve dans l'annexe 1.
+
+
+01     - Création de la pipeline - choisir le nom, le type (pipeline) et cliquez sur OK.
+02     - Sélection de Poll SCM
+03     - Choisir Pipeline Script from SCM 
+04     - SCM ==> GIT
+05     - Indiquez repository URL (par exemple, pour moi https://github.com/hrhouma/hello-python.git)
+06 (*) - IMPORTANT-IMPORTANT-IMPORTANT 
+		Add ==> Jenkins ==> Username with password 
+		(par exemple : hrhouma , mot de passe : votre jeton Github)
+	
+07    - Ne pas oublier de sélectionner votre credentials crée (on a tendance à oublier de sélectionner)
+08 (*)- Dans branch specifier il faut remplacer /*master par /*main en fonction du nom de votre branche.
+09    - Cliquez sur apply , ensuite save.
+
+10 (*)- Revenir à dashboard ==> Manage Jenkins ==> Tools ==> Git installations
+Name : Default , Path to git exacutable : /usr/bin/git  (pour windows : C:\Program Files\Git\cmd\git.exe)
+Remarque: Pour avoir l'emplacement de git dans Ubuntu, vous pouvez utiliser la commande which git et pour windows la commande suivante dans le terminal:
+
+for %i in (git.exe) do @echo.   %~$PATH:i
+
+==> Pour le path, il est important d'exécuter la commande which git qui vous renvoie l'emplacement de git sur votre machine ubuntu
+11    - Cliquez sur apply , ensuite save.
+
+12 (*)- Ne pas utiliser Environement variables sous Global properties sous System (Je vais utiliser l'environnement dans mon Jenkinsfile)
+
+13 (*) - Consultez l'annexe 1
+
+Dans la syntaxe de Groovy, il est important de ne pas écrire des commandes comme la suiavante : git clone ...
+À la place, il faut écrire la commande de cette manière : 
+git branch: 'main', url: 'https://github.com/hrhouma/hello-python.git'
+Regardez votre Jenkinsfile pour la correction
+
+==> Annexe 1 <==
+
+****************************
+****** 1 - Jenkinsfile *****
+****************************
+
+
+pipeline {
+    agent any
+    environment {
+        PATH = "${env.PATH}:/usr/bin/python3"
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+               git branch: 'main', url: 'https://github.com/hrhouma/hello-python.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        sh 'echo "Running on Unix"'
+                        // Add your Unix-specific build commands here
+                    } else {
+                        bat 'echo "Running on Windows"'
+                        // Add your Windows-specific build commands here
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+**************************************
+******  2 - hello.py *****************
+**************************************
+print("Hello, World from Jenkins Pipeline!")
+
+**************************************
+****** 3 - HelloWorld.java ***********
+**************************************
+
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World from Jenkins Pipeline!");
+    }
+}
+
+
+
+
+==> Annexe 2 <==
+
+Pour exécutez les programmes python hello.py ou javac HelloWorld.java, il faut simplement 
+mettre à jour le Jenkinfile et cliquer sur Build now.
+Je vous partage les versions Windows, Linux ou 2 en 1 ;) 
+Je vous invite à regarder aussi l'annexe 3 ! C'est important.
+
+
+
+==> Version WINDOWS
+
+pipeline {
+    agent any
+    environment {
+        JAVA_HOME = 'C:\\Program Files\\Java\\jdk1.8.0_202'
+        PYTHON_HOME = 'C:\\Users\\rehou\\AppData\\Local\\Microsoft\\WindowsApps'
+        PATH = "${env.PATH};${JAVA_HOME}\\bin;${PYTHON_HOME}"
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/hrhouma/hello-python.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        sh 'echo "Running on Unix"'
+                        sh 'javac HelloWorld.java'
+                        sh 'java HelloWorld'
+                        sh 'python3 hello.py'
+                    } else {
+                        bat 'echo "Running on Windows"'
+                        bat 'javac HelloWorld.java'
+                        bat 'java HelloWorld'
+                        bat 'python hello.py'
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+==> Version 1 LINUX
+
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/hrhouma/hello-python.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        withEnv([
+                            "JAVA_HOME=/usr/bin",
+                            "PATH=${env.PATH}:/usr/bin"
+                        ]) {
+                            sh 'echo "Running on Unix"'
+                            sh 'javac HelloWorld.java'
+                            sh 'java HelloWorld'
+                            sh 'python3 hello.py'
+                        }
+                    } else {
+                        withEnv([
+                            "JAVA_HOME=C:\\Program Files\\Java\\jdk1.8.0_202",
+                            "PYTHON_HOME=C:\\Users\\rehou\\AppData\\Local\\Microsoft\\WindowsApps",
+                            "PATH=%JAVA_HOME%\\bin;%PYTHON_HOME%;%PATH%"
+                        ]) {
+                            bat 'echo "Running on Windows"'
+                            bat 'javac HelloWorld.java'
+                            bat 'java HelloWorld'
+                            bat 'python hello.py'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+==> Version 2 LINUX
+
+
+pipeline {
+    agent any
+    environment {
+        // Setting JAVA_HOME and PATH for Unix (Linux)
+        JAVA_HOME = isUnix() ? '/usr/lib/jvm/java-8-openjdk-amd64' : 'C:\\Program Files\\Java\\jdk1.8.0_202'
+        PATH = isUnix() ? "${env.PATH}:${JAVA_HOME}/bin:/usr/bin" : "${env.PATH};${JAVA_HOME}\\bin;C:\\Users\\rehou\\AppData\\Local\\Microsoft\\WindowsApps"
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/hrhouma/hello-python.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        sh 'echo "Running on Unix"'
+                        sh 'javac HelloWorld.java'
+                        sh 'java HelloWorld'
+                        sh 'python3 hello.py'
+                    } else {
+                        bat 'echo "Running on Windows"'
+                        bat 'javac HelloWorld.java'
+                        bat 'java HelloWorld'
+                        bat 'python hello.py'
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+==> Versions LINUX et windows (2 en 1)
+
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/hrhouma/hello-python.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        withEnv([
+                            "JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64",
+                            "PYTHON_HOME=/usr/bin",
+                            "PATH=${env.PATH}:${JAVA_HOME}/bin:${PYTHON_HOME}"
+                        ]) {
+                            sh 'echo "Running on Unix"'
+                            sh 'javac HelloWorld.java'
+                            sh 'java HelloWorld'
+                            sh 'python3 hello.py'
+                        }
+                    } else {
+                        withEnv([
+                            "JAVA_HOME=C:\\Program Files\\Java\\jdk1.8.0_202",
+                            "PYTHON_HOME=C:\\Users\\rehou\\AppData\\Local\\Microsoft\\WindowsApps",
+                            "PATH=${env.PATH};${JAVA_HOME}\\bin;${PYTHON_HOME}"
+                        ]) {
+                            bat 'echo "Running on Windows"'
+                            bat 'javac HelloWorld.java'
+                            bat 'java HelloWorld'
+                            bat 'python hello.py'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+==> Annexe 3 <==
+
+Si vous utilisez Linux (ubuntu2204), il faut installer java pour déterminer comment ajouter les 
+variables d'environnement dans votre Jenkinsfile. 
+
+sudo apt-get update
+sudo apt-get install openjdk-8-jdk
+
+vous pouvez déterminer les emplacement java et python avec ces commandes:
+which java                  ====> /usr/bin/java
+which javac 				====> /usr/bin/javac
+which python 				====> pas de résultats
+which python3  				====> /usr/bin/python3
+
+
+Même chose pour windows, vous pouvez déterminer les emplacement java et python avec ces commandes :
+
+for %i in (java.exe) do @echo.   %~$PATH:i    ==>   C:\Program Files\Java\jdk1.8.0_202\bin\java.exe
+for %i in (python.exe) do @echo.   %~$PATH:i  ==>  C:\Users\rehou\AppData\Local\Microsoft\WindowsApps\python.exe
+for %i in (python3.exe) do @echo.   %~$PATH:i ==>  C:\Users\rehou\AppData\Local\Microsoft\WindowsApps\python3.exe
+
+
+
+
+
+Bon travail !
