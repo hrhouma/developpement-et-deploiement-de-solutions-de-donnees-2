@@ -1,0 +1,1 @@
+- https://medium.com/clevyio/use-airtable-as-a-database-for-your-chatbot-265dbaacec0b
