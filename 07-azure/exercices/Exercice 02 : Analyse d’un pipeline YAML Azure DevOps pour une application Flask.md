@@ -1,4 +1,4 @@
-### **Exercice 2 : Analyse d’un pipeline YAML Azure DevOps pour une application Flask**
+### **Exercice 02 : Analyse d’un pipeline YAML Azure DevOps pour une application Flask**
 
 #### **Objectif :**
 Comprendre et expliquer le rôle de chaque section et tâche dans un pipeline YAML pour une application Flask.
