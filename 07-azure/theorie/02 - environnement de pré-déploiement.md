@@ -7,6 +7,9 @@ Un environnement de pré-déploiement est un **espace intermédiaire** utilisé 
 ### **Concept du pré-déploiement avec Azure App Service (Exemple)**
 Sur l'image fournie, on voit une tâche dans un pipeline DevOps appelée **"Swap Slots"** qui utilise les **slots** dans **Azure App Service** pour gérer des environnements de pré-déploiement.
 
+![image](https://github.com/user-attachments/assets/d4d21370-e56a-45ff-9e92-bea030c5a470)
+
+
 #### **Les "Slots" dans Azure App Service**
 - Azure App Service permet de créer des **slots de déploiement** (par exemple **staging** et **production**).
 - **Slot staging** (pré-déploiement) est utilisé pour tester la nouvelle version de l'application avant de la rendre accessible en production.
