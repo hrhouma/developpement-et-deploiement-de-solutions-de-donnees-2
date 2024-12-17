@@ -47,7 +47,7 @@ Le **"Swap Slots"** que l'on voit dans cette image est une **fonctionnalité ava
 
 ---
 
-### **Résumé pour vos étudiants**
+### **Résumé **
 - **Pré-déploiement** (staging) : Déployez, testez et validez votre application.
 - **Swap Slots** : Échangez l'environnement staging avec production pour un déploiement rapide et fiable.
 - **Rollback** : Si un problème survient, le swap permet de revenir instantanément à l’ancienne version.
