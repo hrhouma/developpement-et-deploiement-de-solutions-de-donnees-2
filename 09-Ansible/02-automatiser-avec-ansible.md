@@ -42,7 +42,7 @@ Sur votre machine de contrôle (Ubuntu Desktop 22.04 ou Ubuntu Server 22.04), ex
 sudo apt update
 sudo apt install -y apt-transport-https ca-certificates curl gnupg lsb-release git
 git clone https://github.com/SkillFlowCoach/install-docker-ubuntu2204.git
-cd install-docker/
+cd install-docker-ubuntu2204/
 chmod +x install-docker.sh
 sudo ./install-docker.sh
 docker version
