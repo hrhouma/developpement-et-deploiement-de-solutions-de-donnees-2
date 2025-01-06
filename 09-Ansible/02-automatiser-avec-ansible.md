@@ -1,9 +1,3 @@
----
-title: "Chapitre 2 - Déployer une Infrastructure Docker avec Ansible"
-description: "Découvrez les principes fondamentaux de Terraform et comprenez comment l'Infrastructure as Code révolutionne le déploiement."
-emoji: "🔧"
----
-
 # Chapitre 2 -  Déployer une Infrastructure Docker avec Ansible - Pratique 02
 
 Dans ce chapitre, nous allons explorer l'utilisation d'Ansible pour automatiser des tâches sur une infrastructure Docker de manière efficace et structurée. Cette infrastructure sera composée de plusieurs conteneurs utilisant différentes distributions Linux (Ubuntu, Debian, AlmaLinux) qui nous permettront de :
