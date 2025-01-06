@@ -1,9 +1,3 @@
----
-title: "Table des Matières du Cours Ansible"
-description: "Table des Matières du Cours Ansible"
-emoji: "📚"
----
-
 1. [**Introduction Théorique à Ansible**](01-introduction-theorique-ansible.md)  
    - Qu'est-ce qu'Ansible ?  
    - Les composants d'Ansible (Control Node, Inventory, Playbook, Module, etc.)  
