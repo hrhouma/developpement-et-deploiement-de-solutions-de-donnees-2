@@ -39,7 +39,7 @@ Vous pouvez consulter notre ebook en cliquant ici : [Mon PDF](../assets/test.pdf
 
 ---
 
-## ✨ **Conclusion Générale du Cours**  
+## **Conclusion Générale du Cours**  
 - Récapitulatif des points clés  
 - Meilleures pratiques pour organiser et structurer vos playbooks  
 - Introduction aux rôles Ansible pour structurer des projets complexes  
@@ -48,7 +48,7 @@ Vous pouvez consulter notre ebook en cliquant ici : [Mon PDF](../assets/test.pdf
 
 ---
 
-## 🛠️ **Pour aller plus loin**  
+## **Pour aller plus loin**  
 - **Documentation Officielle Ansible** : [https://docs.ansible.com](https://docs.ansible.com)  
 - **Ansible Galaxy** : Bibliothèque de rôles Ansible prêts à l’emploi  
 - **Exercices pratiques supplémentaires**  
