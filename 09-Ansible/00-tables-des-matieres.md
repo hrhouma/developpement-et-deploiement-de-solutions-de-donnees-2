@@ -52,5 +52,3 @@ Vous pouvez consulter notre ebook en cliquant ici : [Mon PDF](../assets/test.pdf
 - **Documentation Officielle Ansible** : [https://docs.ansible.com](https://docs.ansible.com)  
 - **Ansible Galaxy** : Bibliothèque de rôles Ansible prêts à l’emploi  
 - **Exercices pratiques supplémentaires**  
-
-Si vous avez des suggestions ou des questions, n'hésitez pas à les partager !
