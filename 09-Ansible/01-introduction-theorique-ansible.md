@@ -239,8 +239,86 @@ ansible-playbook -i inventory.ini deploy-web.yml
 #### [Retour à la Table des Matières](#table-des-matières)
 ---
 
+
+
+
+
+
+
+<a name="pratique-01"></a>
+## 9. Pratique 01 - Installation d'Ansible  
+
+9.1. 📦 **Installez** les dépendances nécessaires :
+   ```bash
+   sudo apt install software-properties-common
+   ```
+9.2. 🛠️ **Ajoutez le dépôt PPA** pour Ansible et mettez à jour :
+   ```bash
+   sudo apt-add-repository --yes --update ppa:ansible/ansible
+   sudo apt update
+   ```
+9.3. ✅ **Installez Ansible** :
+   ```bash
+   sudo apt install ansible
+   ```
+9.4. 📝 **Vérifiez la version** pour confirmer l'installation :
+   ```bash
+   ansible --version
+   ```
+9.5. 📝 **Vérifiez si Ansible est installé et fonctionne correctement sur la machine locale** :
+   ```bash
+   ansible localhost -m 'ping'
+   ```
+
+La commande `ansible localhost -m ping` est une commande ad-hoc de Ansible  qui permet de vérifier si Ansible est installé et fonctionne correctement sur la machine locale (le serveur sur lequel la commande est exécutée).
+
+Je vais faire un décryptage de chaque partie de la commande :
+
+- **`ansible`** : le programme Ansible que vous exécutez.
+- **`localhost`** : spécifie que vous voulez exécuter la commande sur la machine locale (celle où la commande est lancée).
+- **`-m ping`** : utilise le module `ping` d'Ansible pour vérifier la connectivité avec l'hôte spécifié (ici `localhost`). Ce `ping` n'est pas le même que la commande réseau `ping` ; c'est un module d'Ansible qui envoie une requête pour vérifier que l'hôte est accessible et que l'installation d'Ansible est correctement configurée.
+
+### Exemple de Résultat
+
+Si tout est bien configuré, vous devriez voir un message de type :
+
+```plaintext
+localhost | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+```
+
+Cela signifie que la connexion avec l'hôte (`localhost`) est réussie et qu'Ansible fonctionne correctement.
+
+
+
+9.6. 📡 **Exécutez la commande Ansible pour tester la connectivité avec tous les hôtes** :
+   ```bash
+   ansible all -m ping -i inventory
+   ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <a name="conclusion"></a>
-## 9. Conclusion  
+## 10. Conclusion  
 
 L'histoire de GlobalWeb Inc. montre comment Ansible permet de gérer des infrastructures globales de manière uniforme et rapide. Dans le prochain chapitre, nous passerons à la pratique en utilisant Docker et Ansible pour automatiser la configuration complète d'un environnement.
 
