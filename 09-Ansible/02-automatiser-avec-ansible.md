@@ -45,7 +45,7 @@ git clone https://github.com/SkillFlowCoach/install-docker-ubuntu2204.git
 cd install-docker-ubuntu2204/
 chmod +x install-docker.sh
 sudo ./install-docker.sh
-apt install docker-compose
+apt install docker-compose -y
 docker-compose version
 ```
 
