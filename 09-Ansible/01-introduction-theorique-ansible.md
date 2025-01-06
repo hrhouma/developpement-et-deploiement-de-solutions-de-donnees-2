@@ -1,9 +1,3 @@
----
-title: "Chapitre 1 - Introduction Théorique à Ansible"
-description: "Découvrez comment l'automatisation avec Ansible transforme la gestion des infrastructures IT et la différence entre orchestration et automatisation."
-emoji: "🚀"
----
-
 # Chapitre 1 - Introduction Théorique à Ansible et Pratique 01
 
 Dans ce chapitre, nous allons explorer l'utilisation d'Ansible pour automatiser des tâches de manière efficace. Cette introduction théorique vous permettra de :
