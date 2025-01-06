@@ -1,9 +1,3 @@
----
-title: "Chapitre 4 - Travailler avec les Variables, Facts et Registers dans Ansible"
-description: "Découvrez les principes fondamentaux de Terraform et comprenez comment l'Infrastructure as Code révolutionne le déploiement."
-emoji: "🔧"
----
-
 # Chapitre 4 - Travailler avec les Variables, Facts et Registers dans Ansible - Pratique 04
 
 Dans cette pratique avancée, nous allons explorer les **variables**, les **facts**, et les **registers** dans Ansible. Ces éléments vous permettront de créer des playbooks plus dynamiques, flexibles et personnalisés. Vous apprendrez à :
