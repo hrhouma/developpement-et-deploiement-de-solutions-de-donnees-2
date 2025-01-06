@@ -1,9 +1,3 @@
----
-title: "Chapitre 3 - Travailler avec les Playbooks Ansible"
-description: "Découvrez les principes fondamentaux de Terraform et comprenez comment l'Infrastructure as Code révolutionne le déploiement."
-emoji: "🔧"
----
-
 # Chapitre 3 - Travailler avec les Playbooks Ansible - Pratique 03
 
 Dans ce chapitre, nous allons explorer l'utilisation des **playbooks** dans Ansible pour automatiser des tâches complexes de manière efficace. Les playbooks avancés vous permettent d'organiser et de réutiliser votre code de manière structurée. Cette fonctionnalité est particulièrement utile pour :
