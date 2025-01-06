@@ -1,9 +1,3 @@
----
-title: "Chapitre 5 : Utilisation des Boucles dans Ansible"
-description: "Découvrez les principes fondamentaux de Terraform et comprenez comment l'Infrastructure as Code révolutionne le déploiement."
-emoji: "🔧"
----
-
 ## 📝 Introduction
 
 Dans ce chapitre, nous allons explorer l'utilisation des **boucles** dans Ansible pour automatiser des tâches répétitives de manière efficace. Les boucles vous permettent d'exécuter une action plusieurs fois sans avoir à répéter manuellement le code pour chaque élément. Cette fonctionnalité est particulièrement utile pour :
