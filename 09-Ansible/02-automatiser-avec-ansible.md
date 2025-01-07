@@ -73,6 +73,41 @@ nano docker-compose.yml
 
 ### 2.3. Contenu du Fichier `docker-compose.yml`
 
+
+Architecture de l'infrastructure à créer avec docker-compose :
+
+
+```
+                          +----------------------+
+                          |  Ansible Controller  |
+                          |     Ubuntu 22.04     |
+                          |  IP: 172.20.0.X      |
+                          +----------------------+
+                                     |
+                                     |
+        --------------------------------------------------------------------------
+        |        |        |        |        |        |        |
+   +---------+ +---------+ +---------+ +---------+ +---------+ +---------+ +---------+
+   | Node1   | | Node2   | | Node3   | | Node4   | | Node5   | | Node6   | |  NodeX   |
+   | Ubuntu  | | Debian  | | AlmaLin | | AlmaLin | | Ubuntu  | | Ubuntu  | |  (opt)  |
+   | 172.20.0.2| 172.20.0.3| 172.20.0.4| 172.20.0.5| 172.20.0.6| 172.20.0.7|  ...    |
+   +---------+ +---------+ +---------+ +---------+ +---------+ +---------+ +---------+
+
+```
+
+### Légende :
+- **Ansible Controller** : Machine principale de contrôle sous Ubuntu 22.04.
+- **Nodes (Node1 à Node6)** :
+  - **Node1** : Ubuntu
+  - **Node2** : Debian
+  - **Node3, Node4** : AlmaLinux
+  - **Node5, Node6** : Ubuntu
+- Toutes les machines sont sur le réseau `ansible_network` avec des adresses IP statiques dans le sous-réseau `172.20.0.0/24`.
+
+
+
+
+
 Copiez et collez le contenu suivant dans le fichier, en veillant à ce que la configuration pour les conteneurs AlmaLinux soit correcte :
 
 ```yaml
