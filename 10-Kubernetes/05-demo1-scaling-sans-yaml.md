@@ -344,6 +344,10 @@ kubectl get pods -n demo-namespace
 kubectl delete deployment nginx-deployment -n demo-namespace
 kubectl delete namespace demo-namespace
 minikube stop
+kubectl describe pod nginx-deployment-647677fc66-2wr6r -n demo-namespace
+kubectl get pod nginx-deployment-647677fc66-2wr6r -o yaml -n demo-namespace
 ```
 
 [🔙 Retour à la table des matières](#table-des-matieres)
+
+
