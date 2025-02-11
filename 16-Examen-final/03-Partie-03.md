@@ -45,8 +45,6 @@
         update_cache: yes
 ```
 
-## N.B:
-- Les handlers dans Ansible sont des tâches spéciales qui ne s’exécutent que si elles sont appelées via notify. Ils sont souvent utilisés pour redémarrer un service après une modification, comme l'installation d'un package ou la modification d'un fichier de configuration
 
 # **Questions :**  
 1. Ce playbook fonctionnera-t-il sur Ubuntu ? Pourquoi ?  
@@ -151,6 +149,9 @@
      name: apache2
       state: restarted
 ```
+
+## N.B:
+- Les handlers dans Ansible sont des tâches spéciales qui ne s’exécutent que si elles sont appelées via notify. Ils sont souvent utilisés pour redémarrer un service après une modification, comme l'installation d'un package ou la modification d'un fichier de configuration
 
 
 
