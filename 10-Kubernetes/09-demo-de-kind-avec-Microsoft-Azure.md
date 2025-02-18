@@ -343,6 +343,36 @@ k apply -f pod.yaml
 > k apply -f pod.yaml
 
 
+
+## Plus de pratiques
+
+
+```bash
+k version --short
+k get pods
+k run nginx-pod --image=nginx
+k get pods
+k get po --no-headers | wc -l
+k run apache-pod --image=httpd
+k run redis-pod --image=redis
+k run postgres-pod --image=postgres
+k get pods
+k get po --no-headers | wc -l
+k run busybox-pod --image=busybox -- /bin/sh -c "echo Hello Kubernetes"
+k run python-pod --image=python -- /bin/sh -c "python -c 'print(\"Hello from Python\")'"
+k run alpine-pod --image=alpine -- /bin/sh -c "echo 'Alpine Linux in Kubernetes'"
+k run mysql-pod --image=mysql --env="MYSQL_ROOT_PASSWORD=my-secret-pw"
+k get pods
+k get po --no-headers | wc -l
+k describe pod nginx-pod
+k logs nginx-pod
+k delete pod nginx-pod
+k run mypod --image=nginx --dry-run=client -o yaml > mypod.yaml
+k apply -f mypod.yaml
+k get all
+k delete pod --all
+```
+
 #### [🏠 Retour à la table des matières](#table-des-matieres)
 
 <a name="etape5"></a>
