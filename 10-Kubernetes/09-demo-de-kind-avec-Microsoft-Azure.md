@@ -373,6 +373,337 @@ k get all
 k delete pod --all
 ```
 
+## Troubleshooting
+
+
+```bash
+k get pods
+```
+
+```ascii
++---------------+-------+-------------------+----------+-------+
+| NOM           | PRÊT  | STATUT            | REDÉMARR.| ÂGE   |
++---------------+-------+-------------------+----------+-------+
+| alpine-pod    | 0/1   | CrashLoopBackOff  | 6        | 8m21s |
+| apache-pod    | 1/1   | En cours          | 0        | 11m   |
+| busybox-pod   | 0/1   | CrashLoopBackOff  | 6        | 9m54s |
+| mynginx       | 1/1   | En cours          | 0        | 19m   |
+| mypod         | 1/1   | En cours          | 0        | 6m24s |
+| mysql-pod     | 1/1   | En cours          | 0        | 8m11s |
+| nginx-pod     | 1/1   | En cours          | 0        | 12m   |
+| postgres-pod  | 0/1   | CrashLoopBackOff  | 6        | 10m   |
+| python-pod    | 0/1   | CrashLoopBackOff  | 6        | 8m54s |
+| redis-pod     | 1/1   | En cours          | 0        | 11m   |
++---------------+-------+-------------------+----------+-------+
+```
+### Pour déboguer les pods en état CrashLoopBackOff :
+1. Voir les journaux :
+   kubectl logs <nom-du-pod>
+2. Décrire le pod pour voir les événements et les erreurs :
+   kubectl describe pod <nom-du-pod>
+3. Vérifier la commande, l’image et la configuration du conteneur.
+4. Accéder au pod (si possible) avec :
+   kubectl exec -it <nom-du-pod> -- /bin/sh
+5. Corrigez les erreurs, puis redémarrez ou redéployez.
+
+
+
+
+Pour déboguer les pods en `CrashLoopBackOff`, suivez ces étapes :
+
+---
+
+### 1. **Vérifier les logs du pod :**
+```bash
+k logs <nom_du_pod>
+```
+Exemple :
+```bash
+k logs alpine-pod
+```
+
+---
+
+### 2. **Obtenir des détails complets sur l'erreur :**
+```bash
+k describe pod <nom_du_pod>
+```
+Exemple :
+```bash
+k describe pod python-pod
+```
+
+Cela affiche des informations sur la raison du plantage (exemple : image manquante, commande incorrecte, etc.).
+
+---
+
+### 3. **Vérifier les commandes exécutées dans le pod :**
+Les erreurs `CrashLoopBackOff` viennent souvent de commandes erronées.
+
+- **Alpine et BusyBox :** Vérifiez que la commande `echo` ou `sh` est correcte.
+- **Python :** Vérifiez l'échappement des caractères et la syntaxe.
+- **Postgres :** Il faut parfois configurer un mot de passe ou une variable d’environnement.
+
+---
+
+### 4. **Entrer dans un pod défectueux pour tester :**
+```bash
+k exec -it <nom_du_pod> -- /bin/sh
+```
+
+---
+
+### 5. **Relancer un pod après correction :**
+```bash
+k delete pod <nom_du_pod> && k run <nom_du_pod> --image=<image_correcte>
+```
+
+
+
+## Exemple 1
+```bash
+> k logs postgres-pod 
+> Error: Database is uninitialized and superuser password is not specified.
+       You must specify POSTGRES_PASSWORD to a non-empty value for the
+       superuser. For example, "-e POSTGRES_PASSWORD=password" on "docker run".
+
+       You may also use "POSTGRES_HOST_AUTH_METHOD=trust" to allow all
+       connections without a password. This is *not* recommended.
+
+       See PostgreSQL documentation about "trust":
+       https://www.postgresql.org/docs/current/auth-trust.html
+
+```
+
+### Résolution exemple 1
+
+L'erreur indique que PostgreSQL nécessite un mot de passe pour l'utilisateur superadmin. Voici comment résoudre ce problème :
+
+---
+
+### **Supprimer le pod défectueux :**
+```bash
+k delete pod postgres-pod
+```
+
+---
+
+### **Recréer le pod avec une variable d'environnement `POSTGRES_PASSWORD` :**
+```bash
+k run postgres-pod --image=postgres --env="POSTGRES_PASSWORD=mysecretpassword"
+```
+
+---
+
+*PostgreSQL démarrera correctement cette fois-ci.* 😊
+
+
+
+### **Résumé : Déboguer un Pod PostgreSQL en CrashLoopBackOff**
+
+---
+
+### **Problème :**
+Lors de l'exécution de :
+```bash
+k run postgres-pod --image=postgres
+```
+
+Le pod entre dans l'état **CrashLoopBackOff**.
+
+---
+
+### **Vérification des logs :**
+```bash
+k logs postgres-pod
+```
+
+---
+
+### **Message d'erreur affiché :**
+```
+Error: Database is uninitialized and superuser password is not specified.
+You must specify POSTGRES_PASSWORD to a non-empty value for the superuser. 
+For example, "-e POSTGRES_PASSWORD=password" on "docker run".
+```
+
+---
+
+### **Cause de l'erreur :**
+L'image PostgreSQL nécessite une variable d'environnement `POSTGRES_PASSWORD` pour définir le mot de passe de l'utilisateur superadmin. Sans cela, la base de données ne démarre pas.
+
+---
+
+### **Correction étape par étape :**
+
+1. **Supprimer le pod défectueux :**
+   ```bash
+   k delete pod postgres-pod
+   ```
+
+2. **Recréer le pod avec la variable d'environnement correcte :**
+   ```bash
+   k run postgres-pod --image=postgres --env="POSTGRES_PASSWORD=mysecretpassword"
+   ```
+
+---
+
+### **Vérification :**
+```bash
+k get pods
+```
+
+Le pod devrait maintenant être dans l'état **Running**.
+
+---
+
+### **Résumé :**
+- **Problème rencontré :** Pod PostgreSQL en CrashLoopBackOff.
+- **Message d'erreur :** Aucun mot de passe défini.
+- **Solution :** Ajouter `--env="POSTGRES_PASSWORD=<votre_mot_de_passe>"` lors de la création du pod.
+
+---
+
+*Ce processus peut être suivi pour d'autres images nécessitant des variables d'environnement.* 😊
+
+---
+### Exemple 2
+----
+
+
+### **Tutoriel Kubernetes : Déboguer un Pod Python en CrashLoopBackOff**
+
+---
+
+### **Problème :**
+Après l'exécution de :
+```bash
+k run python-pod --image=python -- /bin/sh -c "python -c 'print(\"Hello from Python\")'"
+```
+
+Le pod entre en **CrashLoopBackOff** malgré l'affichage correct de **Hello from Python**.
+
+---
+
+### **Vérification des logs :**
+```bash
+k logs python-pod
+```
+**Message :**
+```
+Hello from Python
+```
+
+---
+
+### **Vérification des détails du pod :**
+```bash
+k describe po python-pod
+```
+
+**Message clé :**
+```
+State: Waiting
+Reason: CrashLoopBackOff
+Last State: Terminated
+Reason: Completed
+Exit Code: 0
+```
+
+---
+
+### **Cause de l'erreur :**
+- Le script Python s'exécute avec succès, puis se termine immédiatement (Exit Code: 0).
+- Kubernetes considère que le conteneur a "crashé" car il n'a pas de processus en cours d'exécution en arrière-plan.
+- Pour éviter ce crash, le conteneur doit exécuter un processus "long-running" ou une boucle infinie.
+
+---
+
+### **Correction étape par étape :**
+
+1. **Supprimer le pod défectueux :**
+   ```bash
+   k delete pod python-pod
+   ```
+
+2. **Recréer le pod avec une boucle infinie :**
+   ```bash
+   k run python-pod --image=python -- /bin/sh -c "while true; do python -c 'print(\"Hello from Python\")'; sleep 10; done"
+   ```
+
+---
+
+### **Vérification :**
+```bash
+k get pods
+```
+Le pod devrait maintenant être en **Running** et continuer à imprimer "Hello from Python" toutes les 10 secondes.
+
+---
+
+### **Résumé :**
+- **Problème rencontré :** Le script Python se termine trop vite.
+- **Message d'erreur :** Exit Code: 0 (Completed).
+- **Solution :** Exécuter une boucle infinie pour garder le conteneur actif.
+
+---
+
+*Vous pouvez appliquer cette méthode pour d'autres conteneurs qui s'arrêtent trop vite.* 😊
+
+
+
+
+### Filter avec des informations spécifiques
+
+Pour filtrer des informations spécifiques avec `kubectl describe`, utilisez :
+
+```bash
+k describe pod <nom_du_pod> | grep -i <mot_clé>
+```
+
+---
+
+### **Exemples pratiques :**
+
+1. **Rechercher le statut d'un pod :**
+   ```bash
+   k describe pod python-pod | grep -i status
+   ```
+
+2. **Trouver l'état du conteneur :**
+   ```bash
+   k describe pod python-pod | grep -i state
+   ```
+
+3. **Vérifier les erreurs ou avertissements :**
+   ```bash
+   k describe pod python-pod | grep -i error
+   ```
+   ```bash
+   k describe pod python-pod | grep -i warning
+   ```
+
+4. **Lister les événements :**
+   ```bash
+   k describe pod python-pod | grep -i event
+   ```
+
+---
+
+*Vous pouvez ajuster `<mot_clé>` pour rechercher n'importe quelle information dans la description du pod !* 😊
+
+
+
+
+
+
+
+
+
+
+
+
+
 #### [🏠 Retour à la table des matières](#table-des-matieres)
 
 <a name="etape5"></a>
