@@ -51,3 +51,31 @@ docker volume create portainer_data && docker run -d -p 8000:8000 -p 9000:9000 -
 
 Après cela, vous pourrez utiliser Portainer pour gérer vos conteneurs Docker à travers une interface graphique intuitive.
 
+
+
+
+```bash
+docker ps
+docker ps -a
+docker system df
+docker system prune
+docker system prune -a
+docker ps -a
+docker volume create portainer_data
+docker volume ls
+docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+docker ps
+docker run -it -d -p 8080:80 --name c1 nginx
+docker run -it -d -p 8081:80 --name c2 nginx
+docker run -it -d -p 8082:80 --name c3 nginx
+docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=root -v /opt/mysqldata:/var/lib/mysql mysql
+docker network create mynet
+docker network ls
+docker network --help
+docker volume create haythem
+docker volume ls
+docker images
+ls /var/lib/docker/volumes
+cd /home/azureuser
+history
+```
