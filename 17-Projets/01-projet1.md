@@ -180,6 +180,8 @@ Un fichier `.github/workflows/deploy.yml` doit :
 | 6     | Tester le déploiement automatique sur un VPS (via SSH)    |
 | 7     | Documenter le tout dans un `README.md`                    |
 
+
+
 ---
 
 ## **10. Évaluation (sur 40 points)**
