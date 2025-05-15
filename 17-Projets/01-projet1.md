@@ -22,7 +22,7 @@ Votre mission : **déployer une infrastructure évolutive, automatisée et propr
 
 ## **3. Description fonctionnelle du projet**
 
-### 📌 Vous devez :
+###  Vous devez :
 
 1. Déployer **au moins 3 instances indépendantes** de Wiki.js :
 
@@ -48,7 +48,7 @@ Votre mission : **déployer une infrastructure évolutive, automatisée et propr
 
 ## **4. Architecture technique**
 
-### 🧱 Composants à installer sur le serveur (VPS)
+###  Composants à installer sur le serveur (VPS)
 
 | Composant        | Rôle                                                |
 | ---------------- | --------------------------------------------------- |
