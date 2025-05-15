@@ -2,11 +2,11 @@
 
 ## **1. Contexte général**
 
-Votre équipe travaille pour **DocInfra**, une entreprise spécialisée dans l’hébergement de documentation technique pour des partenaires externes. Ces partenaires (des établissements scolaires, des entreprises, des associations, etc.) souhaitent disposer de leur propre espace Wiki en ligne, sécurisé, maintenu, et facilement modifiable.
+Votre équipe travaille pour **DocInfra**, une entreprise spécialisée dans l’hébergement de documentation et support technique pour des partenaires externes. Ces partenaires (des établissements scolaires, des entreprises, des associations, etc.) souhaitent disposer de leur propre espace Wiki en ligne, sécurisé, maintenu, et facilement modifiable.
 
 Pour cela, DocInfra utilise l’outil **Wiki.js**, une solution open-source moderne, basée sur Node.js et PostgreSQL, déployée via **Docker**.
 
-Votre mission : **déployer une infrastructure évolutive, automatisée et propre**, permettant de maintenir **plusieurs Wiki.js indépendants**, chacun isolé dans un conteneur, avec sa propre base de données.
+Votre mission : **déployer une infrastructure évolutive, automatisée et propre**, permettant de maintenir **plusieurs sites webs Wiki.js indépendants**, chacun isolé dans un conteneur, avec sa propre base de données.
 
 ---
 
