@@ -1,3 +1,7 @@
+# Rappel (installation windows + serveur ubuntu):
+
+- https://drive.google.com/drive/folders/1oNub4xI2PPGuhuR57b12vVq9D6WXyd5G?usp=sharing
+
 # Method 1
 
 ##  **Prerequisites**
