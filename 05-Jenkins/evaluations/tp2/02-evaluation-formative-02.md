@@ -118,4 +118,3 @@ Soumettez un rapport word sur l'exercice "Déclencher un Pipeline Jenkins avec G
 - Assurez-vous de la lisibilité des captures.
 - Soumettez en PDF ou Word.
 
-Avec ce projet, vous apprendrez comment utiliser Jenkins pour automatiser des tâches de traitement de données en réponse à des changements de code, renforçant ainsi les pratiques d'intégration et de déploiement continu.
