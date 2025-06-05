@@ -5,7 +5,7 @@
 
 ---
 
-## <h2 id="etape-0">Étape 0 – Préparation du projet</h2>
+## <h2 id="etape-0">Préparation du projet</h2>
 
 1. Crée un dossier nommé `projet-pipeline-maven`.
 2. À l’intérieur, crée une structure Maven minimale :
@@ -14,6 +14,56 @@
 mkdir -p projet-pipeline-maven/src/main/java/com/exemple
 mkdir -p projet-pipeline-maven/src/test/java/com/exemple
 ```
+
+
+ou encore mieux !!!
+
+## <h2 id="etape-0-alt">Étape 0 – Génération du projet Maven avec Archetype</h2>
+
+
+### 1. Ouvre ton terminal et exécute :
+
+```bash
+mvn archetype:generate -DgroupId=com.exemple \
+                       -DartifactId=demo-pipeline \
+                       -DarchetypeArtifactId=maven-archetype-quickstart \
+                       -DinteractiveMode=false
+```
+
+
+### 2. Résultat attendu :
+
+Cela va créer automatiquement cette structure :
+
+```
+demo-pipeline/
+├── pom.xml
+├── src/
+│   ├── main/java/com/exemple/App.java
+│   └── test/java/com/exemple/AppTest.java
+```
+
+
+
+### 3. Vérifie le fichier `pom.xml` :
+
+Il est déjà prêt, avec `junit` comme dépendance.
+
+
+
+### 4. Tu peux directement exécuter :
+
+```bash
+cd demo-pipeline
+mvn clean test
+```
+
+
+
+
+
+
+
 
 3. Crée un fichier `pom.xml` minimaliste :
 
