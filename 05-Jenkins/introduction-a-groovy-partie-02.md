@@ -13,7 +13,7 @@
 | 9  | LAB 9 – Jenkinsfile avec agents et environnements | Contrôler l’environnement d’exécution                         |
 | 10 | LAB 10 – Projet final : Pipeline CI/CD complet    | Créer un pipeline complet : build, test, déploiement          |
 
----
+<br/>
 
 <h1 id="lab1">LAB 1 – Premiers pas avec Groovy</h1>
 
@@ -21,7 +21,7 @@
 
 Découvrir les bases du langage Groovy en local : variables, conditions, boucles.
 
----
+
 
 <h2>Étape 1 – Préparer l’environnement</h2>
 
@@ -49,7 +49,7 @@ Découvrir les bases du langage Groovy en local : variables, conditions, boucles
    touch lab1.groovy
    ```
 
----
+
 
 <h2>Étape 2 – Écrire un premier script</h2>
 
@@ -66,7 +66,7 @@ if (age >= 18) {
 }
 ```
 
----
+
 
 <h2>Étape 3 – Exécuter le script</h2>
 
@@ -82,7 +82,7 @@ Résultat attendu :
 Alice est majeur(e).
 ```
 
----
+
 
 <h2>Étape 4 – Ajouter une boucle</h2>
 
@@ -108,7 +108,7 @@ Message numéro 5
 
 
 <br/>
-
+<br/>
 
 <h1 id="lab2">LAB 2 – Fonctions et structures de données</h1>
 
@@ -116,7 +116,7 @@ Message numéro 5
 
 Apprendre à définir et utiliser des fonctions, des listes, des maps, et des closures dans Groovy.
 
----
+
 
 <h2>Étape 1 – Créer un nouveau fichier</h2>
 
@@ -124,7 +124,6 @@ Apprendre à définir et utiliser des fonctions, des listes, des maps, et des cl
 touch lab2.groovy
 ```
 
----
 
 <h2>Étape 2 – Définir une fonction simple</h2>
 
@@ -139,7 +138,7 @@ println(saluer("Alice"))
 > Résultat attendu :
 > `Bonjour, Alice`
 
----
+
 
 <h2>Étape 3 – Ajouter une fonction avec condition</h2>
 
@@ -160,7 +159,7 @@ println(verifierAge(12))
 > `Majeur`
 > `Mineur`
 
----
+
 
 <h2>Étape 4 – Utiliser une liste</h2>
 
@@ -180,7 +179,7 @@ for (fruit in fruits) {
 > `Fruit : banane`
 > `Fruit : kiwi`
 
----
+
 
 <h2>Étape 5 – Utiliser une map (dictionnaire)</h2>
 
@@ -195,7 +194,7 @@ println("Âge : ${personne['age']}")
 > `Nom : Alice`
 > `Âge : 30`
 
----
+
 
 <h2>Étape 6 – Utiliser une closure (fonction anonyme)</h2>
 
@@ -206,7 +205,7 @@ println(doubler(4))  // 8
 println(doubler(10)) // 20
 ```
 
----
+
 
 <h2>Étape 7 – Exécution du script</h2>
 
@@ -214,7 +213,7 @@ println(doubler(10)) // 20
 groovy lab2.groovy
 ```
 
----
+
 
 <h2>Résumé des notions apprises</h2>
 
@@ -227,19 +226,6 @@ groovy lab2.groovy
 
 
 <br/>
-
-
-
-
-
-
-
-
-
-
-
-
-
 <br/>
 
 
@@ -258,7 +244,7 @@ groovy lab2.groovy
 touch lab3.groovy
 ```
 
----
+
 
 <h2>Étape 2 – Écrire un script autonome</h2>
 
@@ -308,7 +294,7 @@ println("Résultat global : ${afficherResultat(moy)}")
 groovy lab3.groovy
 ```
 
----
+
 
 <h2>Résultat attendu</h2>
 
@@ -322,7 +308,7 @@ Moyenne générale : 73.25
 Résultat global : Passable
 ```
 
----
+
 
 <h2>Points pédagogiques</h2>
 
@@ -344,12 +330,6 @@ Résultat global : Passable
 
 
 <br/>
-
-
-
-
-
-
 <br/>
 
 
@@ -363,7 +343,7 @@ Résultat global : Passable
 
 Comprendre la structure de base d’un fichier `Jenkinsfile`, ses éléments principaux, et l’organisation d’un pipeline déclaratif.
 
----
+
 
 <h2>Étape 1 – Qu’est-ce qu’un Jenkinsfile ?</h2>
 
@@ -377,7 +357,7 @@ Il suit généralement la **syntaxe déclarative**, structurée autour des élé
 * `stage { ... }` : une étape du processus.
 * `steps { ... }` : actions à exécuter dans une étape.
 
----
+
 
 <h2>Étape 2 – Créer un Jenkinsfile simple</h2>
 
@@ -430,7 +410,7 @@ pipeline {
 3. Lier le dépôt Git contenant le `Jenkinsfile`.
 4. Jenkins détectera automatiquement le fichier et exécutera le pipeline.
 
----
+
 
 <h2>Étape 4 – Interprétation ligne par ligne</h2>
 
@@ -442,7 +422,7 @@ pipeline {
 | `stage('...') { steps {` | Chaque étape (ex: préparation, tests) contient des instructions |
 | `echo '...'`             | Affiche un message dans la console de Jenkins                   |
 
----
+
 
 <h2>Résultat attendu</h2>
 
@@ -455,7 +435,7 @@ Le pipeline doit s’exécuter avec 4 étapes visibles dans Jenkins :
 
 Chaque étape affiche le message correspondant.
 
----
+
 
 <h2>Résumé des notions introduites</h2>
 
@@ -470,7 +450,7 @@ Chaque étape affiche le message correspondant.
 
 
 
-
+<br/>
 <br/>
 
 
@@ -481,7 +461,7 @@ Chaque étape affiche le message correspondant.
 
 Comprendre la structure de base d’un fichier `Jenkinsfile`, ses éléments principaux, et l’organisation d’un pipeline déclaratif.
 
----
+
 
 <h2>Étape 1 – Qu’est-ce qu’un Jenkinsfile ?</h2>
 
@@ -495,7 +475,7 @@ Il suit généralement la **syntaxe déclarative**, structurée autour des élé
 * `stage { ... }` : une étape du processus.
 * `steps { ... }` : actions à exécuter dans une étape.
 
----
+
 
 <h2>Étape 2 – Créer un Jenkinsfile simple</h2>
 
@@ -539,7 +519,7 @@ pipeline {
 }
 ```
 
----
+
 
 <h2>Étape 3 – Exécution dans Jenkins</h2>
 
@@ -560,7 +540,7 @@ pipeline {
 | `stage('...') { steps {` | Chaque étape (ex: préparation, tests) contient des instructions |
 | `echo '...'`             | Affiche un message dans la console de Jenkins                   |
 
----
+
 
 <h2>Résultat attendu</h2>
 
@@ -573,7 +553,7 @@ Le pipeline doit s’exécuter avec 4 étapes visibles dans Jenkins :
 
 Chaque étape affiche le message correspondant.
 
----
+
 
 <h2>Résumé des notions introduites</h2>
 
@@ -587,6 +567,105 @@ Chaque étape affiche le message correspondant.
 
 
 <br/>
+<br/>
+
+
+
+<h1 id="lab5">LAB 5 – Jenkinsfile avec echo et variables d’environnement</h1>
+
+<h2>Objectif</h2>
+
+Apprendre à :
+
+* Déclarer des variables d’environnement dans un `Jenkinsfile`
+* Réutiliser ces variables dans les étapes du pipeline
+* Structurer un pipeline plus lisible et modulaire
+
+---
+
+<h2>Étape 1 – Créer un Jenkinsfile</h2>
+
+Dans un nouveau projet ou répertoire :
+
+```bash
+touch Jenkinsfile
+```
+
+---
+
+<h2>Étape 2 – Ajouter du contenu avec variables</h2>
+
+```groovy
+pipeline {
+    agent any
+
+    environment {
+        NOM_PROJET = "MonApplication"
+        ENV_DEPLOIEMENT = "Développement"
+        AUTEUR = "Alice"
+    }
+
+    stages {
+        stage('Initialisation') {
+            steps {
+                echo "Début du pipeline pour le projet : ${env.NOM_PROJET}"
+                echo "Environnement cible : ${env.ENV_DEPLOIEMENT}"
+            }
+        }
+
+        stage('Analyse') {
+            steps {
+                echo "Analyse statique du code de ${env.NOM_PROJET}..."
+            }
+        }
+
+        stage('Compilation') {
+            steps {
+                echo "Compilation en cours..."
+            }
+        }
+
+        stage('Déploiement') {
+            steps {
+                echo "Déploiement de ${env.NOM_PROJET} par ${env.AUTEUR}"
+            }
+        }
+    }
+}
+```
+
+---
+
+<h2>Étape 3 – Explication ligne par ligne</h2>
+
+| Élément               | Signification                                           |
+| --------------------- | ------------------------------------------------------- |
+| `environment { ... }` | Déclare des variables disponibles dans tout le pipeline |
+| `env.NOM_PROJET`      | Accès à la variable `NOM_PROJET` via l’objet `env`      |
+| `echo "..."`          | Affiche une information dans la console Jenkins         |
+
+---
+
+<h2>Étape 4 – Résultat attendu</h2>
+
+Lorsque Jenkins exécute ce pipeline, vous devez voir des messages comme :
+
+```
+Début du pipeline pour le projet : MonApplication
+Environnement cible : Développement
+Analyse statique du code de MonApplication...
+Compilation en cours...
+Déploiement de MonApplication par Alice
+```
+
+---
+
+<h2>Résumé des notions apprises</h2>
+
+* Déclaration de variables globales avec `environment`
+* Réutilisation des variables dans plusieurs étapes
+* Meilleure lisibilité et maintenabilité du pipeline
+* Bonne pratique pour centraliser la configuration
 
 
 
@@ -597,6 +676,7 @@ Chaque étape affiche le message correspondant.
 
 
 
+<br/>
 <br/>
 
 
@@ -615,7 +695,7 @@ Chaque étape affiche le message correspondant.
 touch Jenkinsfile
 ```
 
----
+
 
 <h2>Étape 2 – Script de base avec `when`</h2>
 
@@ -663,7 +743,7 @@ pipeline {
 }
 ```
 
----
+
 
 <h2>Étape 3 – Explication</h2>
 
@@ -683,7 +763,7 @@ pipeline {
    * Sur `develop` → seule l’étape *Déploiement vers développement* s’exécute.
    * Sur `main` → seule l’étape *Déploiement vers production* s’exécute.
 
----
+
 
 <h2>Étape 5 – Résultat attendu (dans develop)</h2>
 
@@ -701,7 +781,7 @@ Exécution des tests...
 Déploiement approuvé vers l’environnement de production
 ```
 
----
+
 
 <h2>Résumé des notions introduites</h2>
 
@@ -710,11 +790,7 @@ Déploiement approuvé vers l’environnement de production
 * Début d’une logique CI/CD différenciée selon les environnements (développement, production)
 
 <br/>
-
-
-Voici la suite avec **LAB 7 – Jenkinsfile avec `sh` pour exécuter des commandes shell**, afin de permettre à vos étudiants d’interagir avec le système de fichiers, compiler du code ou lancer des tests via le terminal dans le pipeline Jenkins.
-
----
+<br/>
 
 <h1 id="lab7">LAB 7 – Jenkinsfile avec exécution de commandes `sh`</h1>
 
@@ -731,7 +807,7 @@ Voici la suite avec **LAB 7 – Jenkinsfile avec `sh` pour exécuter des command
 touch Jenkinsfile
 ```
 
----
+
 
 <h2>Étape 2 – Contenu du Jenkinsfile avec `sh`</h2>
 
@@ -777,7 +853,7 @@ pipeline {
 }
 ```
 
----
+
 
 <h2>Étape 3 – Explication</h2>
 
@@ -787,7 +863,7 @@ pipeline {
 | `mkdir`, `rm`, `touch` | Commandes Unix standard simulant build, artefacts, nettoyage |
 | Bloc `'''`             | Permet d’exécuter plusieurs lignes shell                     |
 
----
+
 
 <h2>Étape 4 – Exécution dans Jenkins</h2>
 
@@ -795,7 +871,7 @@ pipeline {
 2. Lier ce dépôt à un projet pipeline dans Jenkins.
 3. Lancer l’exécution manuellement ou via une branche.
 
----
+
 
 <h2>Résultat attendu</h2>
 
@@ -809,7 +885,6 @@ Test 2 : OK
 Dossier temporaire supprimé.
 ```
 
----
 
 <h2>Résumé des notions apprises</h2>
 
@@ -817,17 +892,9 @@ Dossier temporaire supprimé.
 * Simulation d’actions réelles : création de fichiers, tests, nettoyage
 * Introduction à la gestion d’artefacts simples dans Jenkins
 
----
-
-Souhaitez-vous que je vous prépare **LAB 8 – Jenkinsfile avec paramètres d’entrée (`parameters`)**, pour permettre à vos étudiants de créer des pipelines interactifs ?
-
 
 <br/>
-
-
-Voici la suite avec **LAB 8 – Jenkinsfile avec paramètres (`parameters`)**, afin de permettre aux étudiants d’ajouter de l’interactivité aux pipelines Jenkins. Ce laboratoire montre comment déclencher un pipeline avec des choix dynamiques (texte, liste, booléen, etc.).
-
----
+<br/>
 
 <h1 id="lab8">LAB 8 – Jenkinsfile avec paramètres d’entrée</h1>
 
@@ -844,7 +911,7 @@ Voici la suite avec **LAB 8 – Jenkinsfile avec paramètres (`parameters`)**, a
 touch Jenkinsfile
 ```
 
----
+
 
 <h2>Étape 2 – Pipeline avec paramètres</h2>
 
@@ -885,7 +952,7 @@ pipeline {
 }
 ```
 
----
+
 
 <h2>Étape 3 – Explication des types de paramètres</h2>
 
@@ -895,7 +962,7 @@ pipeline {
 | `booleanParam` | `booleanParam(name: ..., ...)`              | true / false             |
 | `choice`       | `choice(name: ..., choices: [...])`         | "dev", "staging", "prod" |
 
----
+
 
 <h2>Étape 4 – Résultat attendu</h2>
 
@@ -910,7 +977,7 @@ En fonction des réponses :
 * Si `EXECUTER_TESTS` est vrai → les tests sont affichés
 * Sinon → l'étape "Tests" est ignorée
 
----
+
 
 <h2>Résumé des notions introduites</h2>
 
@@ -918,17 +985,8 @@ En fonction des réponses :
 * Accès aux paramètres via `params.nom_du_paramètre`
 * Utilisation conditionnelle des étapes avec `when { expression { ... } }`
 
----
-
-Souhaitez-vous que je continue avec **LAB 9 – Jenkinsfile avec agents personnalisés et environnements Docker** ?
-
-
 <br/>
-
-
-Voici la suite avec **LAB 9 – Jenkinsfile avec agents personnalisés et environnements Docker**, pour introduire l'exécution contrôlée du pipeline sur des environnements spécifiques, comme un conteneur Docker.
-
----
+<br/>
 
 <h1 id="lab9">LAB 9 – Jenkinsfile avec agents personnalisés et Docker</h1>
 
@@ -938,7 +996,7 @@ Voici la suite avec **LAB 9 – Jenkinsfile avec agents personnalisés et enviro
 * Exécuter un pipeline dans un conteneur Docker
 * Apprendre à isoler des étapes dans des environnements ciblés
 
----
+
 
 <h2>Étape 1 – Définition de l’agent global Docker</h2>
 
@@ -977,7 +1035,7 @@ pipeline {
 }
 ```
 
----
+
 
 <h2>Explication</h2>
 
@@ -987,7 +1045,7 @@ pipeline {
 | `args '-u root'`                   | Permet de forcer l’utilisateur root dans le conteneur          |
 | `sh`                               | Exécute des commandes Linux dans le conteneur Docker           |
 
----
+
 
 <h2>Étape 2 – Isolation par étape (agents différents par étape)</h2>
 
@@ -1022,7 +1080,7 @@ pipeline {
 }
 ```
 
----
+
 
 <h2>Résultat attendu</h2>
 
@@ -1030,7 +1088,7 @@ pipeline {
 * NodeJS est utilisé uniquement pour la première étape
 * Python est utilisé uniquement pour la deuxième
 
----
+
 
 <h2>Résumé des notions apprises</h2>
 
@@ -1040,11 +1098,8 @@ pipeline {
 
 
 <br/>
+<br/>
 
-
-Voici la dernière étape de la série avec **LAB 10 – Projet final : pipeline CI/CD complet**, qui rassemble tout ce que vos étudiants ont appris : paramètres, conditions, agents, exécution shell et déploiement contrôlé.
-
----
 
 <h1 id="lab10">LAB 10 – Projet final CI/CD complet avec Jenkinsfile</h1>
 
@@ -1059,7 +1114,7 @@ Créer un pipeline Jenkins complet comprenant :
 * Déploiement simulé (développement ou production)
 * Exécution dans un environnement Docker
 
----
+
 
 <h2>Structure du projet</h2>
 
@@ -1070,7 +1125,6 @@ projet-ci-cd/
     └── main.py
 ```
 
----
 
 <h2>Contenu du fichier `app/main.py`</h2>
 
@@ -1082,7 +1136,7 @@ if __name__ == "__main__":
     dire_bonjour()
 ```
 
----
+
 
 <h2>Contenu du `Jenkinsfile`</h2>
 
@@ -1163,9 +1217,9 @@ pipeline {
 }
 ```
 
----
 
-<h2>Étapes pédagogiques validées</h2>
+
+<h2>Étapes </h2>
 
 | Fonctionnalité                            | Implémentée |
 | ----------------------------------------- | ----------- |
@@ -1177,7 +1231,7 @@ pipeline {
 | Agents Docker par étape                   | ✔️          |
 | Nettoyage et gestion des artefacts        | ✔️          |
 
----
+
 
 <h2>Résultat attendu</h2>
 
@@ -1187,7 +1241,7 @@ pipeline {
 * L’application Python est exécutée dans un conteneur Docker
 * Un nettoyage final supprime les artefacts simulés
 
----
+
 
 <h2>Conclusion</h2>
 
