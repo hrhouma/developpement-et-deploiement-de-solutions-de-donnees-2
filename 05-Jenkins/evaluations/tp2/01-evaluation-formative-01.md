@@ -144,4 +144,3 @@ Soumettez un rapport contenant les éléments suivants :
 - Chaque capture doit être brièvement décrite.
 - Assurez-vous de la lisibilité des captures.
 - Soumettez en format PDF ou Word.
-```
