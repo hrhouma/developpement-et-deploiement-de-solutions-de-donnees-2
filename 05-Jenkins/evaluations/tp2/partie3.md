@@ -18,7 +18,7 @@ mkdir -p projet-pipeline-maven/src/test/java/com/exemple
 
 ou encore mieux !!!
 
-## <h2 id="etape-0-alt">Étape 0 – Génération du projet Maven avec Archetype</h2>
+## <h2 id="etape-0-alt"> Génération du projet Maven avec Archetype</h2>
 
 
 ### 1. Ouvre ton terminal et exécute :
