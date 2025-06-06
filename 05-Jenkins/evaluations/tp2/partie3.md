@@ -1,9 +1,9 @@
 <h1 id="examen-pipeline-maven">Examen : Création d’un Pipeline Jenkins pour un Projet Maven</h1>
 
-**Durée** : 2h
-**Objectif** : Automatiser la compilation, les tests et la livraison d’un projet Java Maven avec Jenkins Pipeline (déclaratif)
+- **Durée** : 2h
+- **Objectif** : Automatiser la compilation, les tests et la livraison d’un projet Java Maven avec Jenkins Pipeline (déclaratif)
 
----
+
 
 ## <h2 id="etape-0">Préparation du projet</h2>
 
@@ -186,7 +186,6 @@ stage('Build') {
 }
 ```
 
----
 
 ## <h2 id="etape-4">Étape 4 – Tests Maven</h2>
 
@@ -222,7 +221,7 @@ stage('Package') {
 }
 ```
 
----
+
 
 ## <h2 id="etape-6">Étape 6 – Paramètres dynamiques</h2>
 
@@ -244,7 +243,7 @@ stage('Checkout') {
 }
 ```
 
----
+
 
 ## <h2 id="etape-7">Étape 7 – Analyse statique (facultatif)</h2>
 
@@ -259,7 +258,7 @@ stage('Analyse') {
 }
 ```
 
----
+
 
 ## <h2 id="livrables">Livrables</h2>
 
