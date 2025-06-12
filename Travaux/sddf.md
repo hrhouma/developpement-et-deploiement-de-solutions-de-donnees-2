@@ -15,82 +15,123 @@ Cochez **une seule réponse correcte par question**, sauf indication contraire. 
 ---
 
 **1. Dans Jenkins, quel plugin est utilisé pour exécuter un fichier Jenkinsfile défini dans un dépôt Git ?**
+
 a) Git Publisher Plugin
+
 b) Pipeline Plugin
+
 c) NodeJS Plugin
+
 d) SSH Agent Plugin
+
 
 ---
 
 **2. Quel est le rôle principal d’AWS CodeCommit ?**
+
 a) Orchestrer des tâches CI/CD sur le cloud
+
 b) Fournir une base de données NoSQL pour Git
+
 c) Héberger des dépôts Git privés dans AWS
+
 d) Déclencher des alarmes CloudWatch
 
 ---
 
 **3. Dans AWS CodePipeline, quelle étape permet l’automatisation du déploiement vers un environnement cible ?**
+
 a) Source
+
 b) Build
+
 c) Deploy
+
 d) Approval
 
 ---
 
 **4. Quel fichier est essentiel pour exécuter automatiquement une stack CloudFormation ?**
+
 a) `deploy.sh`
+
 b) `template.yml`
+
 c) `main.tf`
+
 d) `aws.config`
 
 ---
 
 **5. Quelle commande Git permet de relier un dépôt local à un dépôt CodeCommit distant ?**
+
 a) `git connect aws`
+
 b) `git remote add origin <url>`
+
 c) `aws codecommit link`
+
 d) `git clone s3://bucket`
 
 ---
 
 **6. Quelle ressource est définie dans un template CloudFormation pour créer un repository Git ?**
+
 a) `AWS::CodePipeline::Repository`
+
 b) `AWS::CodeCommit::Repository`
+
 c) `AWS::EC2::GitRepo`
+
 d) `AWS::DevTools::GitService`
 
 ---
 
 **7. Dans Jenkins, quel type de déclencheur permet de surveiller automatiquement les commits dans AWS CodeCommit ?**
+
 a) Poll SCM
+
 b) GitHub webhook
+
 c) CloudWatch Event trigger
+
 d) AWS CodeCommit plugin + webhook
 
 ---
 
 **8. Quelle option de `git` permet de cloner un seul *branch* spécifique d’un dépôt ?**
+
 a) `git branch --only`
+
 b) `git clone -b <branch> --single-branch <url>`
+
 c) `git fetch branch=<branch>`
+
 d) `git pull branch <branch>`
 
 ---
 
 **9. Lequel des services suivants permet de déclencher un pipeline CI/CD sans serveur ?**
+
 a) Jenkins installé sur EC2
+
 b) AWS CodePipeline
+
 c) AWS Lambda uniquement
+
 d) Amazon ECS
 
 ---
 
 **10. Parmi les éléments suivants, lesquels peuvent figurer dans un template CloudFormation ?**
 (2 bonnes réponses)
+
 a) `Resources`
+
 b) `Modules`
+
 c) `Outputs`
+
 d) `Events`
 
 ---
