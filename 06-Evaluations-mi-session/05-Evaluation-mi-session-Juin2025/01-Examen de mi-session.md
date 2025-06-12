@@ -240,19 +240,28 @@ if response.status_code != 200:
     exit()
 
 soup = BeautifulSoup(response.text, "lxml")
-divs = soup.find_all("div", class_="div-col")
+
+# Récupération de tous les éléments <li> dans la section du contenu principal
+content = soup.find("div", {"id": "mw-content-text"})
+items = content.find_all("li")
 
 langages = []
-for div in divs:
-    for li in div.find_all("li"):
-        nom = li.text.strip()
-        if nom and nom not in langages:
-            langages.append(nom)
+for li in items:
+    a_tag = li.find("a")
+    if a_tag and "/wiki/" in a_tag.get("href", ""):
+        texte = a_tag.text.strip()
+        if texte and texte not in langages and not texte.startswith("Liste"):
+            langages.append(texte)
 
+# Nettoyage possible : retirer les entrées comme "Langage (informatique)"
+langages = [l for l in langages if len(l) > 1 and not l.startswith("Portail")]
+
+# Export
 df = pd.DataFrame(langages, columns=["Langage"])
 df.to_csv("data.csv", index=False, encoding="utf-8")
 
 print("Fichier 'data.csv' généré avec", len(df), "langages.")
+
 ```
 
 ---
