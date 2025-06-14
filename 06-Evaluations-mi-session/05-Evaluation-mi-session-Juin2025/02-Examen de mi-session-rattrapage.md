@@ -1,8 +1,8 @@
 # Examen de mi-session (rattrapage)
 
-**Thème :** Déploiement – Jenkins, Git, AWS
-**Durée :** 4 heures
-**Matériel autorisé :** Documentation en ligne et notes personnelles
+- **Thème :** Déploiement – Jenkins, Git, AWS
+- **Durée :** 4 heures
+- **Matériel autorisé :** Documentation en ligne et notes personnelles
 
 
 
