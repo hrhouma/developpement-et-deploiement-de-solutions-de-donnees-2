@@ -201,30 +201,198 @@ pipeline {
 
 
 
-## Partie 3 – Extraction, transformation et publication automatisées d'offres d’emploi
 
 
 
-## Contexte
-
-Vous faites partie d’une cellule technologique chargée d’automatiser la veille sur les offres d’emploi dans le domaine du développement logiciel. L’objectif est de construire un pipeline complet qui récupère des offres depuis plusieurs sources, génère un rapport HTML lisible et déploie automatiquement ce rapport via Jenkins sur un espace public.
 
 
 
-## Objectifs 
-
-* Automatiser une chaîne complète de traitement de données (scraping → transformation → publication)
-* Appliquer les pratiques d’intégration et de déploiement continu (CI/CD)
-* Utiliser Jenkins pour coordonner les étapes de traitement
-* Générer un résultat concret et déployé en production
 
 
 
-## Fichiers fournis
 
-* `scraper.py` : script Python complet pour extraire des offres depuis plusieurs sites (HackerNews, Python.org, Remotive, JSRemotely, etc.)
-* `requirements.txt` : dépendances Python à installer
-* Accès Jenkins préconfiguré avec un agent disponible
+
+
+
+
+
+
+# Examen de mi-session — Partie 3
+
+**Extraction, transformation et publication automatisées d’offres d’emploi**
+
+
+
+## 1. Contexte
+
+Vous appartenez à une cellule technologique chargée d’automatiser la veille des offres d’emploi dans le domaine du développement logiciel.
+Votre mission : construire un **pipeline CI/CD complet** piloté par **Jenkins** qui
+
+1. extrait les offres depuis plusieurs sources ;
+2. stocke le résultat au format CSV ;
+3. transforme ce CSV en une page HTML lisible ;
+4. publie automatiquement cette page sur un espace public ;
+5. se déclenche et s’arrête **sans intervention manuelle** en fonction de la présence (ou non) de nouvelles offres.
+
+
+
+## 2. Objectifs 
+
+| Compétence visée         | Description                                                          |
+| ------------------------ | -------------------------------------------------------------------- |
+| Automatisation           | Chaîne complète : *scraping ➝ transformation ➝ tests ➝ publication*. |
+| CI/CD                    | Intégration et déploiement continus via Jenkins.                     |
+| Détection de changements | Arrêt prématuré du pipeline si aucune nouveauté.                     |
+| Déploiement Web          | Mise en ligne publique du rapport HTML.                              |
+| Documentation            | Explications claires dans un `README.md`.                            |
+
+
+
+## 3. Matériel fourni
+
+| Fichier            | Rôle                                                                                                                  |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| `scraper.py`       | Script Python de scraping multi-sources (HackerNews, Python.org, Remotive, JSRemotely, WorkingNomads, AuthenticJobs). |
+| `requirements.txt` | Dépendances : `requests`, `beautifulsoup4`, `lxml`, `pandas`.                                                         |
+
+> **Remarque :** le script complet est annexé en fin d’énoncé ; il génère `jobs.csv`.
+
+
+
+## 4. Arborescence cible
+
+```
+projet-offres/
+├── Jenkinsfile
+├── scraper.py
+├── html_generator.py        # À créer
+├── requirements.txt
+├── data/
+│   ├── jobs.csv             # Dernière extraction
+│   └── jobs_previous.csv    # Extraction précédente
+├── public/
+│   └── index.html           # Rapport HTML généré
+├── logs/
+│   └── log.txt              # Historique / erreurs
+└── README.md
+```
+
+
+
+## 5. Travail à réaliser
+
+### 5.1 Préparation (Install)
+
+* Étape Jenkins `Install`
+
+  * Installation propre des dépendances : `pip install -r requirements.txt`.
+  * Utilisation d’un `venv` recommandée.
+
+### 5.2 Scraping
+
+* Étape `Scraping`
+
+  * Exécution de `scraper.py`
+  * Génération automatique de `data/jobs.csv`.
+
+### 5.3 Transformation HTML
+
+* Créer `html_generator.py` puis étape `Conversion` :
+
+  * Lire `data/jobs.csv`.
+  * Générer `public/index.html` avec un tableau HTML : colonnes **Titre**, **Entreprise**, **Source**, **Lien** (lien cliquable).
+  * Mise en page minimaliste : table responsive, tri, recherche optionnelle.
+
+### 5.4 Validation / Tests
+
+* Étape `Tests` incluant au minimum :
+
+  * Vérification que `jobs.csv` ≥ 10 lignes.
+  * Vérification que `index.html` contient bien une balise `<table>` et au moins 10 lignes de données.
+  * Arrêt du pipeline (`exit 1`) si l’une de ces conditions échoue.
+
+### 5.5 Détection de changements
+
+* Étape `DetectChanges` (obligatoire) :
+
+  * Comparer `jobs.csv` à `jobs_previous.csv` (s’il existe) via `cmp`, `diff` ou hash MD5/SHA-256.
+  * Si **aucune modification**, journaliser « Aucune nouvelle offre » puis **terminer prématurément** le pipeline (`currentBuild.result = 'SUCCESS'; return`).
+  * Si changements détectés :
+
+    * Copier `jobs.csv` → `jobs_previous.csv`.
+    * Poursuivre les étapes `Conversion`, `Archive`, `Deploy`.
+
+### 5.6 Archivage
+
+* Étape `Archive`
+
+  * Archivage Jenkins de `jobs.csv`, `index.html` et `logs/log.txt`.
+
+### 5.7 Déploiement
+
+* Étape `Deploy` (choisir **une** option, la documenter dans le `README.md`) :
+
+| Option          | Détail technique minimal                                         |
+| --------------- | ---------------------------------------------------------------- |
+| A. NGINX local  | `scp public/index.html user@192.168.X.X:/var/www/html/`          |
+| B. Bucket S3    | `aws s3 cp public/index.html s3://mon-bucket/ --acl public-read` |
+| C. GitHub Pages | Push automatique sur la branche `gh-pages`                       |
+| D. VPS perso    | Copie via `scp` ou `rsync` vers `/var/www/html`                  |
+
+### 5.8 Déclenchement automatique
+
+Le pipeline doit démarrer sans action manuelle :
+
+* **WebHook Git** déclenché par `push` **ou**
+* **Planification cron Jenkins** (exemple : `H */6 * * *`) **et**
+* Bloc `DetectChanges` pour éviter les exécutions inutiles.
+
+
+
+## 6. Livrables obligatoires
+
+1. `Jenkinsfile` complet, commenté.
+2. `html_generator.py` fonctionnel.
+3. `README.md` détaillant :
+
+   * Architecture du pipeline.
+   * Choix du moyen de déploiement.
+   * Mécanisme exact de détection de changements.
+4. Captures d’écran Jenkins : exécution réussie, artefacts visibles, étape de déploiement.
+5. Artefacts générés (`jobs.csv`, `index.html`, `log.txt`).
+
+
+
+## 7. Barème (30 points)
+
+| Critère                                         | Pts    |
+| ----------------------------------------------- | ------ |
+| Pipeline Jenkins (Install → Deploy) fonctionnel | 5      |
+| Exécution réussie de `scraper.py`               | 3      |
+| Génération valide de `jobs.csv`                 | 3      |
+| Génération correcte de `index.html`             | 5      |
+| Détection et gestion des changements            | 4      |
+| Archivage des artefacts dans Jenkins            | 2      |
+| Déploiement public opérationnel                 | 5      |
+| Documentation (`README.md`) claire              | 3      |
+| **Total**                                       | **30** |
+
+### Bonus (+3 pts)
+
+* Pipeline s’arrêtant intelligemment si aucune nouveauté (hash ou diff propre, journalisation claire).
+
+
+
+## 8. Règles et conseils
+
+* Aucune variable sensible (clé AWS, mot de passe) ne doit apparaître en clair dans le dépôt Git.
+* Le code doit être commenté et respecter les standards PEP 8.
+* Tout échec d’étape doit faire échouer le build (exit code ≠ 0).
+* Utilisez `logging` plutôt que `print()` dans vos scripts.
+
+
+
+### Annexe : contenu abrégé de `scraper.py`
 
 
 ```
@@ -388,114 +556,14 @@ main()
 ```
 
 
-#### `requirements.txt`
+## requirements.txt
 
 ```
+txt
 requests
 beautifulsoup4
 lxml
 pandas
 ```
-
-
-## Arborescence cible du projet
-
-```
-projet-offres/
-├── Jenkinsfile
-├── scraper.py
-├── html_generator.py         # À créer
-├── requirements.txt
-├── data/
-│   └── jobs.csv              # Généré automatiquement
-├── public/
-│   └── index.html            # Généré automatiquement
-└── README.md
-```
-
-
-
-## Étapes obligatoires
-
-### 1. Étape de préparation (Install)
-
-* Installer toutes les dépendances Python nécessaires via `pip install -r requirements.txt`
-* S'assurer que Python et `pip` sont bien accessibles depuis Jenkins
-
-### 2. Étape de scraping (Scraping)
-
-* Exécuter `scraper.py` depuis Jenkins
-* Générer automatiquement le fichier `jobs.csv` dans un répertoire `data/`
-
-### 3. Étape de transformation (Conversion)
-
-* Créer un script Python `html_generator.py` permettant de transformer le contenu de `jobs.csv` en un fichier HTML lisible (table, mise en page basique, liens cliquables)
-* Générer le fichier dans `public/index.html`
-
-### 4. Étape de test (Qualité)
-
-* Ajouter des vérifications dans Jenkins pour s’assurer que :
-
-  * `jobs.csv` contient au moins 10 offres
-  * `index.html` contient bien des offres visibles
-  * Aucun fichier n’est vide ou invalide
-
-### 5. Étape d’archivage
-
-* Archiver `jobs.csv` et `index.html` comme artefacts Jenkins
-* Permettre leur consultation après chaque exécution du pipeline
-
-### 6. Étape de déploiement
-
-Vous devez déployer le fichier `index.html` généré vers un des environnements suivants :
-
-* **Option A** : Déploiement vers un serveur NGINX local (ex : `/var/www/html`)
-* **Option B** : Déploiement vers un bucket S3 public configuré en mode site statique
-* **Option C** : Déploiement via GitHub Pages
-* **Option D** : Déploiement automatique sur un VPS via `scp`
-
-**Justifiez votre choix dans le `README.md`.**
-
-### 7. Déclenchement automatique du pipeline (Trigger)
-
-Le pipeline Jenkins doit se déclencher automatiquement lorsqu’un nouveau commit est poussé dans le dépôt Git contenant le projet. Vous pouvez aussi déclencher le pipeline si les offres d’emploi changent (modification du fichier `jobs.csv`).
-
-
-
-## Livrables obligatoires
-
-* `Jenkinsfile` complet, fonctionnel et commenté
-* `html_generator.py` avec transformation correcte vers un tableau HTML
-* `jobs.csv` généré automatiquement
-* `index.html` généré automatiquement
-* `README.md` expliquant :
-
-  * Le fonctionnement global
-  * La structure du pipeline
-  * Les choix techniques
-  * Le mécanisme de déclenchement
-* Captures d’écran de Jenkins montrant :
-
-  * Le pipeline en exécution
-  * Les artefacts générés
-  * Le déploiement réussi
-
-
-
-## Bonus (+3 points maximum)
-
-Implémentez un système de détection automatique de changement : si les offres n’ont **pas changé** depuis la dernière exécution, le pipeline **s’arrête prématurément** et ne génère pas de nouveaux fichiers.
-
-Exemples :
-
-* Comparaison des hash du fichier `jobs.csv`
-* Sauvegarde du fichier précédent (`jobs_previous.csv`) et `diff` automatique
-* Utilisation d’un système de version dans Git pour vérifier les changements
-
-
-
-
-
-
 
 
