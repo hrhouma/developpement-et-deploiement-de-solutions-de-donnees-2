@@ -236,3 +236,90 @@ ansible-doc apt
 [7]: https://github.com/ansible-collections/arista.eos?utm_source=chatgpt.com "Ansible Network Collection for Arista EOS - GitHub"
 [8]: https://docs.ansible.com/ansible/latest/collections/awx/awx/index.html?utm_source=chatgpt.com "Awx.Awx — Ansible Community Documentation"
 
+
+
+
+
+
+# Annexe 2-  Quiz : Comprendre les modules Ansible 
+
+### Question 1
+
+Dans Ansible, un **module** sert à :
+a) Créer des scripts Python
+b) Définir l’ordre d’exécution des tâches
+c) Exécuter une tâche précise (ex. : installer un paquet)
+d) Lancer une machine virtuelle
+
+---
+
+### Question 2
+
+Quel module Ansible est utilisé pour **installer un paquet** sur une machine Debian/Ubuntu ?
+a) `yum`
+b) `copy`
+c) `apt`
+d) `service`
+
+---
+
+### Question 3
+
+Quel module sert à **copier un fichier** sur une machine distante ?
+a) `template`
+b) `copy`
+c) `file`
+d) `fetch`
+
+---
+
+### Question 4
+
+Lequel de ces modules sert à **gérer les services** (ex. : nginx, apache) ?
+a) `service`
+b) `user`
+c) `ping`
+d) `package`
+
+---
+
+### Question 5
+
+Tu veux ajouter un nouvel utilisateur Linux avec Ansible. Quel module utilises-tu ?
+a) `adduser`
+b) `user`
+c) `passwd`
+d) `group`
+
+---
+
+### Question 6
+
+Dans un playbook Ansible, où se trouve le nom du module ?
+a) Dans la section `hosts`
+b) Dans la ligne `name:`
+c) Juste après la ligne `- name:`
+d) Juste sous `- name:`, avec le nom du module comme clé
+
+---
+
+### Question 7
+
+Quel module te permet d’**exécuter une commande brute** sur la machine distante ?
+a) `command`
+b) `copy`
+c) `ping`
+d) `template`
+
+---
+
+### Question 8
+
+À quoi sert le module `template` ?
+a) À créer des répertoires vides
+b) À envoyer un fichier statique
+c) À envoyer un fichier **Jinja2** avec variables
+d) À chiffrer des fichiers
+
+
+
