@@ -241,7 +241,7 @@ ansible-doc apt
 
 
 
-# Annexe 2-  Quiz : Comprendre les modules Ansible 
+# Annexe 1 -  Quiz : Comprendre les modules Ansible 
 
 ### Question 1
 
@@ -320,6 +320,103 @@ a) À créer des répertoires vides
 b) À envoyer un fichier statique
 c) À envoyer un fichier **Jinja2** avec variables
 d) À chiffrer des fichiers
+
+
+
+<br/>
+
+# Annexe 2 - Exempels de code
+
+
+
+### 1. Utiliser le module `apt` pour installer un paquet Debian
+
+```yaml
+- name: Installer le paquet nginx
+  ansible.builtin.apt:
+    name: nginx
+    state: present
+```
+
+---
+
+### 2. Utiliser le module `yum` pour installer un paquet RedHat/CentOS
+
+```yaml
+- name: Installer httpd (Apache)
+  ansible.builtin.yum:
+    name: httpd
+    state: latest
+```
+
+---
+
+### 3. Utiliser le module `copy` pour copier un fichier
+
+```yaml
+- name: Copier un fichier de configuration
+  ansible.builtin.copy:
+    src: ./nginx.conf
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: '0644'
+```
+
+---
+
+### 4. Utiliser le module `user` pour créer un utilisateur
+
+```yaml
+- name: Créer un utilisateur nommé "alice"
+  ansible.builtin.user:
+    name: alice
+    state: present
+```
+
+---
+
+### 5. Utiliser le module `service` pour démarrer un service
+
+```yaml
+- name: Démarrer le service nginx
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true
+```
+
+---
+
+### 6. Utiliser le module `lineinfile` pour modifier un fichier texte
+
+```yaml
+- name: Ajouter une ligne dans /etc/hosts
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    line: "192.168.1.10 serveur1.local"
+    create: yes
+```
+
+---
+
+### 7. Utiliser le module `debug` pour afficher un message
+
+```yaml
+- name: Afficher un message de test
+  ansible.builtin.debug:
+    msg: "Déploiement terminé avec succès"
+```
+
+---
+
+### 8. Utiliser le module `command` pour exécuter une commande
+
+```yaml
+- name: Lister les fichiers du répertoire /etc
+  ansible.builtin.command:
+    cmd: ls -l /etc
+```
 
 
 
