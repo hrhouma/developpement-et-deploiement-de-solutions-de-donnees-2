@@ -1,1 +1,3 @@
-
+- RBAC
+- Moindre priv
+- terraform en production (question de layne)
