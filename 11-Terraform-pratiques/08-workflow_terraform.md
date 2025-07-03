@@ -49,7 +49,7 @@ Une fois que le plan est validé, vous pouvez appliquer les changements pour cr�
 terraform apply
 ```
 
-Terraform vous demandera de confirmer l'application des changements. Vous pouvez également automatiser cette étape en utilisant `-auto-approve`.
+Terraform vous demandera de confirmer l'application des changements. Vous pouvez également automatiser cette étape en utilisant `--auto-approve`.
 
 ## 5. Gestion de l'État
 
