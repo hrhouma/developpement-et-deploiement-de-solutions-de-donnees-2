@@ -1,3 +1,4 @@
 - RBAC
 - Moindre priv
 - terraform en production (question de layne)
+- Module pour aws pour ansible
