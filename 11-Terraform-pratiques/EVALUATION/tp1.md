@@ -1,9 +1,12 @@
-# EXAMEN – TRAVAIL PRATIQUE 2 : TERRAFORM & INFRASTRUCTURE AWS
+# EXAMEN – TRAVAIL PRATIQUE : TERRAFORM & INFRASTRUCTURE AWS
 
 **Titre** : Analyse et optimisation d’un déploiement Cloud avec Terraform
 **Consignes** : Travail en équipe – supports autorisés (code du projet, documentation officielle Terraform)
 
+# Références: 
 
+- https://github.com/hrhouma/developpement-et-deploiement-de-solutions-de-donnees-2/blob/main/11-Terraform-pratiques/12-travail-pratique-02.md
+- https://github.com/hrhouma/terraform-1.git
 
 ## PARTIE 1 — DESSIN TECHNIQUE ET EXPLICATION DU DÉROULEMENT (10 points)
 
