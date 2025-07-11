@@ -22,7 +22,7 @@ kubectl apply -f mypod.yaml
 > Cette commande crée le Pod dans le cluster Kubernetes.
 
 
-# 2 - Ajout d'un Labl
+# 2 - Ajout d'un Label
 
 #### Méthode 1 - Ajouter directement dans le yaml (la spécification et le mettre à jour via kubectl apply -f mypod.yaml)
 
