@@ -54,3 +54,7 @@ kubectl get po --show-labels
 kubectl label pod nginx classe=bigdata --overwrite
 kubectl get po --show-labels
 ```
+
+
+- https://stackoverflow.com/questions/36741974/how-to-use-kubectl-command-with-flag-selector
+- https://stackoverflow.com/questions/77301400/how-to-list-all-labels-in-kubernetes
