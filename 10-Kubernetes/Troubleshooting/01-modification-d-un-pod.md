@@ -21,7 +21,7 @@ kubectl apply -f mypod.yaml
 
 > Cette commande crée le Pod dans le cluster Kubernetes.
 
-##### Équivalent du code ci-haut:
+##### Équivalent de tout le code ci-haut:
 
 ```ssh
 kubectl run my-pod --image=nginx
