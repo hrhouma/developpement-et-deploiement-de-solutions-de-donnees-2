@@ -1,6 +1,3 @@
-
-
-
 # 1 - Équivalent pour la création d'un Pod en ligen de commande (Ajout d'un label)
 
 
