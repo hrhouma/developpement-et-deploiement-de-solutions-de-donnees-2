@@ -737,25 +737,25 @@ graph TB
 
 ```mermaid
 gitGraph
-   commit id: Dev_NodePort tag: "🛠️ Dev: NodePort"
+   commit "Dev: NodePort"
    branch staging
    checkout staging
-   commit id: Staging_LB tag: "🧪 Staging: LoadBalancer"
-   commit id: Staging_SSL tag: "🔒 Add SSL"
+   commit "Staging: LoadBalancer"
+   commit "Add SSL"
    checkout main
    merge staging
-   commit id: Prod_LB tag: "🚀 Prod: Single LoadBalancer"
+   commit "Prod: Single LoadBalancer"
 
    branch microservices
    checkout microservices
-   commit id: Add_API tag: "🔧 Add API Service"
-   commit id: Add_DB tag: "🗄️ Add Database Service"
-   commit id: Add_Cache tag: "⚡ Add Cache Service"
+   commit "Add API Service"
+   commit "Add Database Service"
+   commit "Add Cache Service"
    checkout main
    merge microservices
-   commit id: Too_Many_LBs tag: "💸 Problem: Multiple LoadBalancers"
-   commit id: Move_Ingress tag: "🌐 Solution: Migrate to Ingress"
-   commit id: Optimize_Cost tag: "💰 Cost Optimization Complete"
+   commit "Problem: Multiple LoadBalancers"
+   commit "Solution: Migrate to Ingress"
+   commit "Cost Optimization Complete"
 ```
 
 ### 🔄 Stratégie de Migration Step-by-Step
@@ -948,4 +948,5 @@ Cette visualisation exhaustive vous donne une **vision complète** des services 
 
 
 **Vous avez maintenant une maîtrise visuelle complète des services Kubernetes ! 🎉**
+
 
