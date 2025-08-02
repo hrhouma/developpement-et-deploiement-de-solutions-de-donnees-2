@@ -4,90 +4,86 @@
 
 Ce document présente une **approche visuelle complète** pour comprendre les services Kubernetes. Chaque diagramme illustre les concepts, architectures, flux et comparaisons entre les différents types de services.
 
----
-
-## 🏗️ Architecture Globale des Services
-
 ### 📊 Vue d'ensemble complète
 
 ```mermaid
 graph TB
     subgraph "🌐 Internet/Clients Externes"
-        Client[👤 Client Web]
-        API_Client[🤖 Client API]
-        Mobile[📱 App Mobile]
+        Client["👤 Client Web"]
+        API_Client["🤖 Client API"]
+        Mobile["📱 App Mobile"]
     end
-    
+
     subgraph "☁️ Cloud Provider Infrastructure"
-        CloudLB1[⚖️ Cloud LoadBalancer 1<br/>$18/mois]
-        CloudLB2[⚖️ Cloud LoadBalancer 2<br/>$18/mois]
-        CloudLB_Ingress[⚖️ Cloud LoadBalancer<br/>pour Ingress<br/>$18/mois]
+        CloudLB1["⚖️ Cloud LoadBalancer 1\n\$18/mois"]
+        CloudLB2["⚖️ Cloud LoadBalancer 2\n\$18/mois"]
+        CloudLB_Ingress["⚖️ Cloud LoadBalancer\npour Ingress\n\$18/mois"]
     end
-    
+
     subgraph "🖥️ Cluster Kubernetes"
         subgraph "🚪 Ingress Layer (Solution Moderne)"
-            IngressController[🎯 Ingress Controller<br/>NGINX/Traefik/Istio]
-            IngressRules[📋 Ingress Rules<br/>SSL + Routing]
+            IngressController["🎯 Ingress Controller\nNGINX/Traefik/Istio"]
+            IngressRules["📋 Ingress Rules\nSSL + Routing"]
         end
-        
+
         subgraph "🔗 Services Layer"
             subgraph "Production Services"
-                LB_Service1[⚖️ LoadBalancer Service<br/>Frontend Production]
-                LB_Service2[⚖️ LoadBalancer Service<br/>API Production]
-                ClusterIP_DB[🔒 ClusterIP Service<br/>Database (interne)]
-                ClusterIP_Cache[🔒 ClusterIP Service<br/>Redis Cache (interne)]
+                LB_Service1["⚖️ LoadBalancer Service\nFrontend Production"]
+                LB_Service2["⚖️ LoadBalancer Service\nAPI Production"]
+                ClusterIP_DB["🔒 ClusterIP Service\nDatabase (interne)"]
+                ClusterIP_Cache["🔒 ClusterIP Service\nRedis Cache (interne)"]
             end
-            
+
             subgraph "Development Services"
-                NodePort_Dev[🚪 NodePort Service<br/>Development<br/>Port: 31200]
+                NodePort_Dev["🚪 NodePort Service\nDevelopment\nPort: 31200"]
             end
         end
-        
+
         subgraph "📦 Pods Layer"
             subgraph "Frontend Tier"
-                Frontend_Pod1[🎨 Frontend Pod 1<br/>React/Vue/Angular]
-                Frontend_Pod2[🎨 Frontend Pod 2<br/>React/Vue/Angular]
+                Frontend_Pod1["🎨 Frontend Pod 1\nReact/Vue/Angular"]
+                Frontend_Pod2["🎨 Frontend Pod 2\nReact/Vue/Angular"]
             end
-            
+
             subgraph "Backend Tier"
-                API_Pod1[🔧 API Pod 1<br/>Node.js/Python/Go]
-                API_Pod2[🔧 API Pod 2<br/>Node.js/Python/Go]
-                API_Pod3[🔧 API Pod 3<br/>Node.js/Python/Go]
+                API_Pod1["🔧 API Pod 1\nNode.js/Python/Go"]
+                API_Pod2["🔧 API Pod 2\nNode.js/Python/Go"]
+                API_Pod3["🔧 API Pod 3\nNode.js/Python/Go"]
             end
-            
+
             subgraph "Data Tier"
-                DB_Pod[🗄️ Database Pod<br/>PostgreSQL/MongoDB]
-                Cache_Pod[⚡ Cache Pod<br/>Redis/Memcached]
+                DB_Pod["🗄️ Database Pod\nPostgreSQL/MongoDB"]
+                Cache_Pod["⚡ Cache Pod\nRedis/Memcached"]
             end
-            
+
             subgraph "Development Tier"
-                Dev_Pod[🛠️ Dev Pod<br/>Test Environment]
+                Dev_Pod["🛠️ Dev Pod\nTest Environment"]
             end
         end
     end
-    
+
     subgraph "💻 Development Environment"
-        Developer[👨‍💻 Développeur]
-        Kind[🐳 Kind/Minikube<br/>avec extraPortMappings]
+        Developer["👨‍💻 Développeur"]
+        Kind["🐳 Kind/Minikube\navec extraPortMappings"]
     end
-    
+
     %% Connexions Production LoadBalancer
     Client -->|HTTPS:443| CloudLB1
     API_Client -->|HTTPS:443| CloudLB2
     CloudLB1 --> LB_Service1
     CloudLB2 --> LB_Service2
-    
+
     %% Connexions Production Ingress (Recommandé)
     Mobile -->|HTTPS:443| CloudLB_Ingress
     CloudLB_Ingress --> IngressController
     IngressController --> IngressRules
     IngressRules -->|www.app.com| LB_Service1
     IngressRules -->|api.app.com| LB_Service2
-    
+
     %% Connexions Development
     Developer -->|localhost:31200| Kind
     Kind -->|Port Mapping| NodePort_Dev
-    
+
     %% Services vers Pods
     LB_Service1 --> Frontend_Pod1
     LB_Service1 --> Frontend_Pod2
@@ -95,11 +91,11 @@ graph TB
     LB_Service2 --> API_Pod2
     LB_Service2 --> API_Pod3
     NodePort_Dev --> Dev_Pod
-    
+
     %% Communication interne (ClusterIP)
     ClusterIP_DB --> DB_Pod
     ClusterIP_Cache --> Cache_Pod
-    
+
     %% Communication inter-services
     API_Pod1 -.->|SQL| ClusterIP_DB
     API_Pod2 -.->|SQL| ClusterIP_DB
@@ -107,7 +103,7 @@ graph TB
     API_Pod1 -.->|Cache| ClusterIP_Cache
     API_Pod2 -.->|Cache| ClusterIP_Cache
     API_Pod3 -.->|Cache| ClusterIP_Cache
-    
+
     %% Styles
     classDef internet fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
     classDef cloud fill:#fff3e0,stroke:#f57c00,stroke-width:2px
@@ -119,7 +115,7 @@ graph TB
     classDef pod_backend fill:#fff8e1,stroke:#ff8f00,stroke-width:2px
     classDef pod_data fill:#e8eaf6,stroke:#3f51b5,stroke-width:2px
     classDef dev fill:#f1f8e9,stroke:#558b2f,stroke-width:2px
-    
+
     class Client,API_Client,Mobile internet
     class CloudLB1,CloudLB2,CloudLB_Ingress cloud
     class IngressController,IngressRules ingress
@@ -132,9 +128,11 @@ graph TB
     class Dev_Pod,Developer,Kind dev
 ```
 
----
 
-## 🔍 Comparaison Détaillée par Type
+<br/>
+<br/>
+
+# 2 -  Comparaison Détaillée par Type
 
 ### 1. 🔒 ClusterIP - Communication Interne
 
@@ -945,5 +943,6 @@ Cette visualisation exhaustive vous donne une **vision complète** des services 
 2. **Implémentez** Ingress en production  
 3. **Optimisez** vos coûts cloud
 4. **Maîtrisez** les patterns de déploiement avancés
+
 
 **Vous avez maintenant une maîtrise visuelle complète des services Kubernetes ! 🎉**
