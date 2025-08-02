@@ -762,45 +762,52 @@ gitGraph
 
 ```mermaid
 graph TD
-    subgraph "🔄 Migration Strategy: LoadBalancer → Ingress"
-        subgraph "📊 Phase 1: Assessment"
-            A1[📋 Audit current services]
-            A2[💰 Calculate costs]
-            A3[🎯 Plan ingress rules]
-        end
-        
-        subgraph "🛠️ Phase 2: Preparation"
-            B1[🎯 Install ingress controller]
-            B2[🔒 Setup cert-manager]
-            B3[📋 Create ingress configs]
-            B4[🧪 Test in staging]
-        end
-        
-        subgraph "🚀 Phase 3: Migration"
-            C1[🕊️ Start with 1 service]
-            C2[📊 Monitor metrics]
-            C3[✅ Validate functionality]
-            C4[🔄 Migrate remaining services]
-        end
-        
-        subgraph "🧹 Phase 4: Cleanup"
-            D1[🗑️ Remove old LoadBalancers]
-            D2[💰 Verify cost savings]
-            D3[📚 Update documentation]
-            D4[🎓 Train team]
-        end
+    %% Étapes
+    A1["Audit current services"]
+    A2["Calculate costs"]
+    A3["Plan ingress rules"]
+
+    B1["Install ingress controller"]
+    B2["Setup cert-manager"]
+    B3["Create ingress configs"]
+    B4["Test in staging"]
+
+    C1["Start with 1 service"]
+    C2["Monitor metrics"]
+    C3["Validate functionality"]
+    C4["Migrate remaining services"]
+
+    D1["Remove old LoadBalancers"]
+    D2["Verify cost savings"]
+    D3["Update documentation"]
+    D4["Train team"]
+
+    %% Flux logique
+    A1 --> A2 --> A3 --> B1
+    B1 --> B2 --> B3 --> B4 --> C1
+    C1 --> C2 --> C3 --> C4 --> D1
+    D1 --> D2 --> D3 --> D4
+
+    %% Groupes par phase
+    subgraph "Phase 1: Assessment"
+        A1; A2; A3
     end
-    
-    A1 --> A2 --> A3
-    A3 --> B1 --> B2 --> B3 --> B4
-    B4 --> C1 --> C2 --> C3 --> C4
-    C4 --> D1 --> D2 --> D3 --> D4
-    
+    subgraph "Phase 2: Preparation"
+        B1; B2; B3; B4
+    end
+    subgraph "Phase 3: Migration"
+        C1; C2; C3; C4
+    end
+    subgraph "Phase 4: Cleanup"
+        D1; D2; D3; D4
+    end
+
+    %% Styles
     classDef assessment fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
     classDef preparation fill:#fff3e0,stroke:#f57c00,stroke-width:2px
     classDef migration fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
     classDef cleanup fill:#fce4ec,stroke:#c2185b,stroke-width:2px
-    
+
     class A1,A2,A3 assessment
     class B1,B2,B3,B4 preparation
     class C1,C2,C3,C4 migration
@@ -948,5 +955,6 @@ Cette visualisation exhaustive vous donne une **vision complète** des services 
 
 
 **Vous avez maintenant une maîtrise visuelle complète des services Kubernetes ! 🎉**
+
 
 
