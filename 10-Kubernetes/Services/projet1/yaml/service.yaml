@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-service
+  namespace: webapp-namespace
+  labels:
+    app: webapp
+spec:
+  selector:
+    app: webapp
+  type: NodePort  # LoadBalancer, not good with kind
+  ports:
+    - port: 8080
+      targetPort: 80
+      nodePort: 31200

@@ -1,0 +1,7 @@
+- hosts: node
+  become: true
+  tasks:
+    - name: Create new webapp deployment
+      shell: KUBECONFIG=/home/ubuntu/.kube/config kubectl apply -f /home/ubuntu/deployment.yaml
+    - name: Create new webapp service
+      shell: KUBECONFIG=/home/ubuntu/.kube/config kubectl apply -f /home/ubuntu/service.yaml
