@@ -1,0 +1,28 @@
+# Configuration Kind pour le développement avec port mapping
+# Utilisé dans les exercices du cours
+
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+metadata:
+  name: cours-services-cluster
+nodes:
+  - role: control-plane
+    extraPortMappings:
+      # Port pour l'exercice NodePort
+      - containerPort: 31200
+        hostPort: 31200
+        protocol: TCP
+      
+      # Port pour l'exercice multi-services
+      - containerPort: 31201
+        hostPort: 31201
+        protocol: TCP
+      
+      # Port pour l'ingress controller
+      - containerPort: 80
+        hostPort: 8080
+        protocol: TCP
+        
+      - containerPort: 443
+        hostPort: 8443
+        protocol: TCP
