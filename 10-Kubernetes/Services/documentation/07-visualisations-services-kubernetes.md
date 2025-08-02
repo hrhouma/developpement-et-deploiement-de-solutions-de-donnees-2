@@ -658,64 +658,65 @@ graph TB
     class Switch switch
 ```
 
+
 ### 2. 🕊️ Canary Deployment avec Ingress
 
 ```mermaid
 graph TB
     subgraph "🕊️ Canary Deployment avec Ingress"
         subgraph "🌐 Internet"
-            Users[👥 100 Utilisateurs]
+            Users["👥 100 Utilisateurs"]
         end
-        
+
         subgraph "🎯 Ingress Controller"
-            MainIngress[📋 Main Ingress<br/>90% traffic]
-            CanaryIngress[🕊️ Canary Ingress<br/>10% traffic<br/>nginx.ingress.kubernetes.io/canary: true<br/>nginx.ingress.kubernetes.io/canary-weight: 10]
+            MainIngress["📋 Main Ingress\n90% traffic"]
+            CanaryIngress["🕊️ Canary Ingress\n10% traffic\nnginx.ingress.kubernetes.io/canary: true\nnginx.ingress.kubernetes.io/canary-weight: 10"]
         end
-        
+
         subgraph "📊 Distribution du Trafic"
-            Stable90[📊 90 utilisateurs<br/>Version Stable]
-            Canary10[🕊️ 10 utilisateurs<br/>Version Canary]
+            Stable90["📊 90 utilisateurs\nVersion Stable"]
+            Canary10["🕊️ 10 utilisateurs\nVersion Canary"]
         end
-        
+
         subgraph "🔗 Services"
-            StableService[🔒 Service Stable<br/>version=v1.0.0]
-            CanaryService[🕊️ Service Canary<br/>version=v1.1.0]
+            StableService["🔒 Service Stable\nversion=v1.0.0"]
+            CanaryService["🕊️ Service Canary\nversion=v1.1.0"]
         end
-        
+
         subgraph "📦 Pods"
-            StablePods[📦 Stable Pods<br/>v1.0.0 (3 replicas)]
-            CanaryPods[📦 Canary Pods<br/>v1.1.0 (1 replica)]
+            StablePods["📦 Stable Pods\nv1.0.0 (3 replicas)"]
+            CanaryPods["📦 Canary Pods\nv1.1.0 (1 replica)"]
         end
-        
+
         subgraph "📊 Monitoring"
-            Metrics[📊 Metrics<br/>Error Rate, Latency<br/>Business KPIs]
-            Alerts[🚨 Alerts<br/>Rollback if issues]
+            Metrics["📊 Metrics\nError Rate, Latency\nBusiness KPIs"]
+            Alerts["🚨 Alerts\nRollback if issues"]
         end
     end
-    
+
     Users --> MainIngress
     Users --> CanaryIngress
-    
+
     MainIngress --> Stable90
     CanaryIngress --> Canary10
-    
+
     Stable90 --> StableService
     Canary10 --> CanaryService
-    
+
     StableService --> StablePods
     CanaryService --> CanaryPods
-    
+
     StablePods --> Metrics
     CanaryPods --> Metrics
     Metrics --> Alerts
-    
+
     classDef users fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
     classDef ingress fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
     classDef traffic fill:#fff3e0,stroke:#f57c00,stroke-width:2px
     classDef stable fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
     classDef canary fill:#fff8e1,stroke:#ff8f00,stroke-width:2px
     classDef monitoring fill:#fce4ec,stroke:#c2185b,stroke-width:2px
-    
+
     class Users users
     class MainIngress,CanaryIngress ingress
     class Stable90,Canary10 traffic
@@ -724,36 +725,37 @@ graph TB
     class Metrics,Alerts monitoring
 ```
 
----
+
+
+
+
+
 
 ## 🔄 Migration Between Service Types
 
 ### 📈 Évolution des Services selon la Maturité
 
 ```mermaid
-gitgraph
-    commit id: "🛠️ Dev: NodePort"
-    
-    branch staging
-    checkout staging
-    commit id: "🧪 Staging: LoadBalancer"
-    commit id: "🔒 Add SSL"
-    
-    checkout main
-    merge staging
-    commit id: "🚀 Prod: Single LoadBalancer"
-    
-    branch microservices
-    checkout microservices
-    commit id: "🔧 Add API Service"
-    commit id: "🗄️ Add Database Service"
-    commit id: "⚡ Add Cache Service"
-    
-    checkout main
-    merge microservices
-    commit id: "💸 Problem: Multiple LoadBalancers"
-    commit id: "🌐 Solution: Migrate to Ingress"
-    commit id: "💰 Cost Optimization Complete"
+gitGraph
+   commit id: Dev_NodePort tag: "🛠️ Dev: NodePort"
+   branch staging
+   checkout staging
+   commit id: Staging_LB tag: "🧪 Staging: LoadBalancer"
+   commit id: Staging_SSL tag: "🔒 Add SSL"
+   checkout main
+   merge staging
+   commit id: Prod_LB tag: "🚀 Prod: Single LoadBalancer"
+
+   branch microservices
+   checkout microservices
+   commit id: Add_API tag: "🔧 Add API Service"
+   commit id: Add_DB tag: "🗄️ Add Database Service"
+   commit id: Add_Cache tag: "⚡ Add Cache Service"
+   checkout main
+   merge microservices
+   commit id: Too_Many_LBs tag: "💸 Problem: Multiple LoadBalancers"
+   commit id: Move_Ingress tag: "🌐 Solution: Migrate to Ingress"
+   commit id: Optimize_Cost tag: "💰 Cost Optimization Complete"
 ```
 
 ### 🔄 Stratégie de Migration Step-by-Step
@@ -946,3 +948,4 @@ Cette visualisation exhaustive vous donne une **vision complète** des services 
 
 
 **Vous avez maintenant une maîtrise visuelle complète des services Kubernetes ! 🎉**
+
