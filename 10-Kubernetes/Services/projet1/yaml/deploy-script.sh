@@ -7,6 +7,9 @@ echo "🚀 Déploiement du projet Kubernetes..."
 echo "📦 Recréation du cluster kind..."
 kind delete cluster
 kind create cluster --config kind-config.yaml
+kubectl cluster-info --context kind-kind
+kubectl config get-contexts
+kubectl config use-context kind-<NEW_NAME>
 
 # 2. Attendre que le cluster soit prêt
 echo "⏰ Attente que le cluster soit prêt..."
