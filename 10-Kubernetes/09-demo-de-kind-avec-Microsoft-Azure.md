@@ -88,6 +88,8 @@ Pour commencer, vous devez :
    Les scripts seront créés comme indiqué ci-bas.
 
 ```bash
+touch 01-script1_setup_azure.sh 02-script2_create_master.sh 03-script3_configure_master.sh 05-script5_kubernetes_reset.sh 06-script3_configure_master2.sh 07-script7_cleanup.sh
+
 nano 01-script1_setup_azure.sh
 nano 02-script2_create_master.sh
 nano 03-script3_configure_master.sh
@@ -835,6 +837,7 @@ az group delete --name k8s-cluster --yes --no-wait
 
 
 #### [🏠 Retour à la table des matières](#table-des-matieres)
+
 
 
 
