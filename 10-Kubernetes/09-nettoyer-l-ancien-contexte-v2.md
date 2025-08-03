@@ -90,3 +90,89 @@ done
 ```
 
 
+<br/>
+
+# Annexe 1
+
+
+
+Je vous propose **5 variantes** valides de fichiers `kind-config.yaml` pour différents types de clusters Kubernetes en local avec Kind :
+
+
+### Variante 1 – Cluster simple (1 control-plane, 1 worker)
+
+```yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+  - role: worker
+```
+
+
+
+### Variante 2 – Cluster multi-nœuds (1 control-plane, 3 workers)
+
+```yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+  - role: worker
+  - role: worker
+  - role: worker
+```
+
+
+
+### Variante 3 – Cluster HA (3 control-planes, 2 workers)
+
+```yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+  - role: control-plane
+  - role: control-plane
+  - role: worker
+  - role: worker
+```
+
+
+
+### Variante 4 – Cluster avec port forwarding sur le control-plane
+
+```yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+    extraPortMappings:
+      - containerPort: 30000
+        hostPort: 30000
+        protocol: TCP
+  - role: worker
+```
+
+
+
+### Variante 5 – Cluster avec configuration kubeadm personnalisée
+
+```yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+kubeadmConfigPatches:
+  - |
+    kind: ClusterConfiguration
+    apiVersion: kubeadm.k8s.io/v1beta2
+    metadata:
+      name: config
+    networking:
+      podSubnet: "10.244.0.0/16"
+nodes:
+  - role: control-plane
+  - role: worker
+```
+
+
+
