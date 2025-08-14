@@ -213,3 +213,57 @@ Ces quatre stratégies ne sont pas exclusives ; certaines organisations les comb
 # Partie C — Questions de code et compréhension (55 points)
 
 
+*VOUS AVEZ LE CHOIX ENTRE OPTION C1 ou OPTION C2*
+
+
+# OPTION C1
+
+# Références: 
+
+- https://github.com/hrhouma/developpement-et-deploiement-de-solutions-de-donnees-2/blob/main/11-Terraform-pratiques/12-travail-pratique-02.md
+- https://github.com/hrhouma/terraform-1.git
+
+
+1. Dessinez le **workflow général** de l’infrastructure Terraform fournie (`TERRAFORM-1`).
+2. Indiquez **qui appelle quoi**, **dans quel ordre**, et quelles **ressources AWS** sont concernées.
+3. Le schéma doit inclure les **fichiers du projet** visibles dans l’arborescence (`main.tf`, `autoscaling.tf`, `snapshot.tf`, `s3.tf`, etc.) et **les interactions entre eux**.
+4. Y a-t-il un fichier principal ?
+5. Comment les appels entre les fichiers sont-ils gérés ?
+6. À quoi faut-il faire attention pour que les ressources soient créées dans le bon ordre ?
+
+7. Prenez **deux fichiers de votre choix** parmi :
+`main.tf`, `autoscaling.tf`, `snapshot.tf`, `rds.tf`, `s3.tf`
+
+Expliquez **comment ils interagissent** entre eux ou avec d'autres parties du projet.
+
+* Existe-t-il des références croisées ?
+* Ces fichiers dépendent-ils des mêmes ressources ou variables ?
+* Comment Terraform sait-il quoi faire en premier ?
+
+
+8. Selon vous, que pourrait-on **améliorer** dans la structure actuelle du projet Terraform-1 ?
+
+* Fichiers de variables ?
+* Modularité ?
+* Réduction de duplication ?
+* Sécurité des identifiants ?
+
+Citez **au moins 3 améliorations concrètes**, avec une courte justification.
+
+
+9. Fonction Lambda et automatisation
+
+Expliquez le rôle de la fonction `lambda_function.py` dans ce projet :
+
+* À quoi sert-elle ?
+* Comment est-elle configurée pour être appelée automatiquement ?
+* Quelle ressource AWS déclenche son exécution ?
+* Que faudrait-il vérifier pour que tout fonctionne ?
+
+
+
+
+
+
+
+
