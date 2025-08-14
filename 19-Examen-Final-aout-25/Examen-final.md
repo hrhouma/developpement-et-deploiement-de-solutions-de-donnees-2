@@ -213,7 +213,7 @@ Ces quatre stratégies ne sont pas exclusives ; certaines organisations les comb
 # Partie C — Questions de code et compréhension (55 points)
 
 
-*VOUS AVEZ LE CHOIX ENTRE OPTION C1 ou OPTION C2*
+*VOUS AVEZ LE CHOIX ENTRE OPTION C1 ou OPTION C2 ou OPTION C3*
 
 
 # OPTION C1
