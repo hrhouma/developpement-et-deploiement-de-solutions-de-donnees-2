@@ -263,7 +263,384 @@ Expliquez le rôle de la fonction `lambda_function.py` dans ce projet :
 
 
 
+# OPTION C2
+
+- La startup « CaféDev » lance une API `catalog` consommée par des clients web externes. L'équipe veut « aller vite » et publie un premier brouillon de manifestes. Le tech lead affirme:
+- Votre mission: auditer, repérer les faussetés/pièges, corriger, proposer des améliorations.
 
 
 
+### Livrables attendus
+- Un fichier  listant: erreurs, impacts, corrections proposées (avec justification en 1–3 lignes chacune).
+- Des manifestes corrigés (`deployment.yaml`, `service.yaml`, optionnel `ingress.yaml`).
+- Commandes utiles (`kubectl get/describe`, `kubectl logs`, `curl` interne/externe si applicable).
+
+
+
+### Manifeste initial (avec pièges)
+
+```yaml
+# deployment.yaml (brouillon fourni par l'équipe)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog-deploy
+  labels:
+    app: website
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: catalog
+  template:
+    metadata:
+      labels:
+        app: catalog-api
+    spec:
+      containers:
+        - name: catalog
+          image: nginx:1.25 # placeholder
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 9090     # piège: ne correspond pas au port exposé
+            initialDelaySeconds: 1
+            periodSeconds: 2
+          livenessProbe:
+            tcpSocket:
+              port: http     # nommé mais cible un port inexistant
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            limits:
+              cpu: "200m"
+              memory: "128Mi"
+            # requests manquants
+          env:
+            - name: ENV
+              value: prod
+```
+
+```yaml
+# service.yaml (brouillon fourni par l'équipe)
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog
+spec:
+  type: ClusterIP  
+  selector:
+    app: catalog  
+  ports:
+    - name: web
+      port: 80
+      targetPort: 80  
+      nodePort: 30080 
+```
+
+```yaml
+# ingress.yaml (optionnel mais souvent demandé)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: catalog
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: catalog.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: catalog
+                port:
+                  number: 80
+```
+
+
+### Tâches
+1) Analysez l'énoncé et les manifestes. Relevez au moins 10 incohérences/erreurs/pièges. Pour chacune:
+   - Dites si c'est correct, améliorable ou faux
+   - Expliquez l'impact (fonctionnel/sécurité/fiabilité)
+   - Proposez une correction
+
+2) Corrigez les manifestes pour rendre l'API accessible à des clients externes selon deux approches alternatives:
+   - A. Sans Ingress: Service de type `NodePort` (cluster on-prem) OU `LoadBalancer` (si cloud supporté)
+   - B. Avec Ingress: Service `ClusterIP` derrière un Ingress Controller
+
+
+
+# OPTION C3
+
+
+La startup « CaféDev » expose plusieurs composants de l’API `catalog` et veut ouvrir l’accès aux clients externes et internes. Un brouillon de manifests a été partagé “pour gagner du temps”. Votre mission: auditer spécifiquement la **couche Services** (types, sélecteurs, ports, exposition), repérer les faussetés/pièges, corriger, et proposer des améliorations.
+
+### Livrables attendus
+
+* Un fichier listant: erreurs liées aux **Services**, impact, correction proposée (justification 1–3 lignes).
+* Manifests corrigés: `deployment.yaml`, `service.yaml` (et `ingress.yaml` si vous le jugez nécessaire).
+* Commandes de vérification (focus Services): `kubectl get/describe svc,endpoints`, `kubectl get pods -o wide`, `kubectl port-forward`, tests réseau internes/externe si applicable.
+
+---
+
+## Manifeste initial (avec pièges)
+
+> Placez tout dans `bundle.yaml` et appliquez tel quel avant d’auditer.
+
+```yaml
+# Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cafedev
+
+---
+# Deployment principal (catalog-api)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog-api
+  namespace: cafedev
+  labels:
+    app: catalog-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: catalog-api
+  template:
+    metadata:
+      labels:
+        app: catalog-api
+    spec:
+      containers:
+        - name: api
+          image: nginx:1.25
+          ports:
+            - name: web
+              containerPort: 8080
+            - name: metrics
+              containerPort: 9100
+
+---
+# Deployment secondaire (catalog-admin)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog-admin
+  namespace: cafedev
+  labels:
+    app: catalog-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: catalog-admin
+  template:
+    metadata:
+      labels:
+        app: catalog-admin
+    spec:
+      containers:
+        - name: admin
+          image: nginx:1.25
+          ports:
+            - name: http
+              containerPort: 8081
+
+---
+# 1) Service interne pour catalog-api (ClusterIP attendu)
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog-api
+  namespace: cafedev
+spec:
+  type: ClusterIP
+  selector:
+    app: catalog     
+  ports:
+    - name: http
+      port: 80
+      targetPort: http  
+    - name: metrics
+      port: 9100
+      targetPort: 9200   
+
+---
+# 2) Service externe direct (NodePort)
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog-api-nodeport
+  namespace: cafedev
+spec:
+  type: NodePort
+  selector:
+    app: catalog-api
+  externalTrafficPolicy: Local  
+  ports:
+    - name: web
+      port: 80
+      targetPort: 8080
+      nodePort: 80              
+    - name: web-dup
+      port: 80                  
+      targetPort: web          
+
+---
+# 3) Service LoadBalancer “rapide” (cloud?)
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog-api-lb
+  namespace: cafedev
+spec:
+  type: LoadBalancer
+  selector:
+    app: catalog-api
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 999999   # à valider selon la norme
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+    - name: udp-alt
+      port: 9999
+      protocol: UDP           
+
+---
+# 4) Service Headless utilisé “pour le fun”
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog-headless
+  namespace: cafedev
+spec:
+  clusterIP: None
+  type: LoadBalancer         
+  selector:
+    app: catalog-api
+  ports:
+    - name: head
+      port: 8080
+      targetPort: web
+
+---
+# 5) Service ExternalName 
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-db
+  namespace: cafedev
+spec:
+  type: ExternalName
+  externalName: db.external.example.com
+  ports:                      
+    - port: 5432
+
+---
+# 6) Service “vide” pour endpoints manuels 
+apiVersion: v1
+kind: Service
+metadata:
+  name: legacy-svc
+  namespace: cafedev
+spec:
+  type: ClusterIP
+  selector: {}               
+  ports:
+    - name: legacy
+      port: 7777
+      targetPort: 7777
+
+---
+# 7) Service admin : ports et noms incohérents
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog-admin
+  namespace: cafedev
+spec:
+  type: ClusterIP
+  selector:
+    app: catalog-admin
+  ports:
+    - name: http              
+      port: 80
+      targetPort: 8082         
+    - name: http                
+      port: 8081
+      targetPort: http
+
+---
+# 8) Ingress “bonus” (facultatif dans cet exercice)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: catalog
+  namespace: cafedev
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: catalog.cafedev.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: catalog-api
+                port:
+                  number: 80
+```
+
+
+
+## Tâches
+
+1. **Audit focalisé Services**
+   Relevez **au moins 12** incohérences/erreurs/pièges spécifiquement liés aux **Services** (type, sélecteurs, ports, protocoles, stratégies d’externalisation, noms de ports, duplication, headless, ExternalName, endpoints, etc.).
+   Pour chaque point:
+
+   * Indiquez si c’est correct, améliorable ou faux.
+   * Expliquez l’impact (résolution de service, endpoints non créés, trafic non routé, exposition incorrecte, pertes de sessions, incompatibilité protocolaire, etc.).
+   * Proposez une correction concrète (1–3 lignes de justification).
+
+2. **Rendre `catalog-api` accessible à des clients externes** selon **une** des deux voies (au choix) :
+
+   * **Sans Ingress** : via `NodePort` (on-prem) ou `LoadBalancer` (si support cloud).
+   * **Avec Ingress** : `Service` de type `ClusterIP` placé derrière l’Ingress Controller.
+     Décrivez brièvement votre choix et ses implications côté Service.
+
+3. **Vérifications ciblées Services**
+   Dressez une courte liste de commandes et tests pour:
+
+   * Vérifier la création des **Endpoints/EndpointSlices** et la correspondance selectors ↔ labels.
+   * Vérifier la cohérence **port/targetPort** (noms et numéros).
+   * Tester l’accessibilité depuis un Pod outillage (`kubectl exec -it … -- curl …`).
+   * Tester l’accès externe si vous optez pour NodePort/LoadBalancer/Ingress.
+
+
+
+## Indices
+
+* Les **selectors** contrôlent la présence ou l’absence d’Endpoints.
+* Un **ExternalName** n’expose pas de ports et ne crée pas d’Endpoints.
+* Les **NodePorts** doivent respecter la plage autorisée et ne pas être dupliqués.
+* Les **noms de ports** doivent être **uniques** par Service et cohérents avec les cibles nommées.
+* **Headless** (`clusterIP: None`) et **LoadBalancer** poursuivent des objectifs différents.
+* Vérifiez le **protocole** (TCP/UDP) et la réalité des ports écoutés côté Pods.
+* `externalTrafficPolicy: Local` modifie la distribution du trafic et les IP sources visibles.
+
+  ## Annexe:
+
+- Un **Service headless** dans Kubernetes est un Service configuré avec `clusterIP: None`. Contrairement à un Service classique, il ne fournit pas d’adresse IP virtuelle unique : il renvoie directement la liste des adresses IP des Pods correspondants, ce qui permet aux clients de se connecter à eux individuellement (utile pour des bases de données distribuées ou des protocoles spécifiques comme gRPC point-à-point). En revanche, un Service de type **LoadBalancer** repose sur la création d’un point d’entrée unique, géré par le fournisseur cloud, qui répartit le trafic entre les Pods via l’IP virtuelle du Service. Associer `clusterIP: None` et `type: LoadBalancer` est donc contradictoire : le mode headless supprime la notion d’IP unique, tandis que le LoadBalancer exige cette IP pour fonctionner. En pratique, cette configuration empêchera la création correcte du load balancer et n’atteindra pas l’effet attendu.
 
