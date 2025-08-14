@@ -213,7 +213,7 @@ Ces quatre stratégies ne sont pas exclusives ; certaines organisations les comb
 # Partie C — Questions de code et compréhension (55 points)
 
 
-*VOUS AVEZ LE CHOIX ENTRE OPTION C1 ou OPTION C2 ou OPTION C3*
+*VOUS AVEZ LE CHOIX ENTRE OPTION C1 ou OPTION C2 ou OPTION C3 ou OPTION C4*
 
 
 # OPTION C1
@@ -643,4 +643,25 @@ spec:
   ## Annexe:
 
 - Un **Service headless** dans Kubernetes est un Service configuré avec `clusterIP: None`. Contrairement à un Service classique, il ne fournit pas d’adresse IP virtuelle unique : il renvoie directement la liste des adresses IP des Pods correspondants, ce qui permet aux clients de se connecter à eux individuellement (utile pour des bases de données distribuées ou des protocoles spécifiques comme gRPC point-à-point). En revanche, un Service de type **LoadBalancer** repose sur la création d’un point d’entrée unique, géré par le fournisseur cloud, qui répartit le trafic entre les Pods via l’IP virtuelle du Service. Associer `clusterIP: None` et `type: LoadBalancer` est donc contradictoire : le mode headless supprime la notion d’IP unique, tandis que le LoadBalancer exige cette IP pour fonctionner. En pratique, cette configuration empêchera la création correcte du load balancer et n’atteindra pas l’effet attendu.
+
+
+# Option C4
+
+**Consigne**
+Vous devez proposer **une idée de pipeline CI/CD** pour un projet applicatif de votre choix (web, API, mobile, microservice…).
+
+**Votre travail doit inclure :**
+
+1. **Description du pipeline** – Présentez les étapes clés (CI et/ou CD) que vous mettriez en place.
+2. **Fichier de configuration** – Fournissez un exemple de configuration (`.gitlab-ci.yml`, `.github/workflows/xxx.yml`, `Jenkinsfile`, etc.) correspondant à votre idée.
+3. **Commandes et code** – Montrez les commandes principales utilisées (ex. `docker build`, `npm test`, `kubectl apply`).
+4. **Documentation courte** – Expliquez le rôle de chaque étape.
+
+**Liberté**
+
+* Vous choisissez l’outil CI/CD.
+* Vous choisissez le langage et le type d’application.
+* Vous pouvez vous limiter à la CI, à la CD, ou couvrir les deux.
+
+**Livrable attendu** : Un fichier texte, Markdown, word , ppt ou PDF regroupant la description, le code/configuration, et les explications.
 
